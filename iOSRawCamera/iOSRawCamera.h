@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
+#import <UIKit/UIKit.h>
 
 //! Project version number for iOSRawCamera.
 FOUNDATION_EXPORT double iOSRawCameraVersionNumber;
