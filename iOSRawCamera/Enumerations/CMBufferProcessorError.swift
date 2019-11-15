@@ -11,7 +11,7 @@
 /// - invalidBuffer: The `CMSampleBufferIsValid` function returned false
 /// - dataIsNotReady: The `CMSampleBufferDataIsReady` function returned false
 /// - cvPixelBufferConversionFailed: The `CMSampleBufferGetImageBuffer` failed to convert the `CMSampleBuffer` to `CVPixelBuffer`
-enum CMBufferProcessorError: Error, Equatable {
+public enum CMBufferProcessorError: Error, Equatable {
     case invalidBuffer
     case dataIsNotReady
     case cvPixelBufferConversionFailed

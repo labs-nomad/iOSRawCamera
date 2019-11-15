@@ -6,7 +6,7 @@
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
 
-struct CameraAuthorizationController {
+public struct CameraAuthorizationController {
     /// Type alias for camera permission completion
     public typealias CameraPermissionReceived = (_ granted: Bool) -> Void
     

@@ -18,7 +18,7 @@ public enum VideoFeedState {
     case running
 }
 
-extension VideoFeedState: Equatable {
+public extension VideoFeedState: Equatable {
     public static func == (lhs: VideoFeedState, rhs: VideoFeedState) -> Bool {
         switch (lhs, rhs) {
         case (VideoFeedState.notPrepared(nil), VideoFeedState.notPrepared(nil)):

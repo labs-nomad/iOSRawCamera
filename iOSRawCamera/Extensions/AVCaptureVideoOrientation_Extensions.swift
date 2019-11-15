@@ -6,7 +6,7 @@
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
 
-extension AVCaptureVideoOrientation {
+public extension AVCaptureVideoOrientation {
     public init?(deviceOrientation: UIDeviceOrientation) {
         switch deviceOrientation {
         case .portrait:

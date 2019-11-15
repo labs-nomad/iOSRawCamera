@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum CameraControllerError: Error, Equatable {
+public enum CameraControllerError: Error, Equatable {
     case captureSessionAlreadyRunning
     case captureSessionIsMissing
     case inputsAreInvalid
