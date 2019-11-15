@@ -10,6 +10,11 @@ public struct CameraAuthorizationController {
     /// Type alias for camera permission completion
     public typealias CameraPermissionReceived = (_ granted: Bool) -> Void
     
+    
+    public init() {
+        
+    }
+    
     /// Function that you can call to see if the User has provided camera authorization
     /// - Parameter authorization: A Type that can determine the Camera Authorization status
     public func isCameraAuthorized(authorization: AVCaptureDevice.Type = AVCaptureDevice.self) -> Bool {
