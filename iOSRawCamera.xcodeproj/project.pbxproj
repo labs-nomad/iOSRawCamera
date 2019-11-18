@@ -7,10 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC12379D23834BA100C83BEB /* AVCaptureVideoOrientation_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC12379C23834BA100C83BEB /* AVCaptureVideoOrientation_Tests.swift */; };
+		CC12379F238350FC00C83BEB /* VideoFeedState_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC12379E238350FC00C83BEB /* VideoFeedState_Tests.swift */; };
+		CC1237A12383555F00C83BEB /* MockSampleBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1237A02383555F00C83BEB /* MockSampleBuffer.swift */; };
+		CC1237A3238356C400C83BEB /* CMSampleBuffer_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1237A2238356C400C83BEB /* CMSampleBuffer_Tests.swift */; };
+		CC31D8F62383294C009B1287 /* CameraAuthorizationController_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31D8F52383294C009B1287 /* CameraAuthorizationController_Tests.swift */; };
+		CC31D8F923832D3D009B1287 /* AVCaptureDeviceCameraAuthorizationInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31D8F823832D3D009B1287 /* AVCaptureDeviceCameraAuthorizationInterface.swift */; };
+		CC31D8FC23832E7A009B1287 /* AVCaptureDevice_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31D8FB23832E7A009B1287 /* AVCaptureDevice_Extensions.swift */; };
+		CC31D8FE23833084009B1287 /* MockAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31D8FD23833084009B1287 /* MockAuthorizer.swift */; };
 		CC8D6CC9237E180600565B7D /* iOSRawCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8D6CBF237E180600565B7D /* iOSRawCamera.framework */; };
-		CC8D6CCE237E180600565B7D /* iOSRawCameraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D6CCD237E180600565B7D /* iOSRawCameraTests.swift */; };
 		CC8D6CD0237E180600565B7D /* iOSRawCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = CC8D6CC2237E180600565B7D /* iOSRawCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CC8D6CDA237E19E400565B7D /* iOSRawCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D6CD9237E19E400565B7D /* iOSRawCamera.swift */; };
+		CC8D6CDA237E19E400565B7D /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D6CD9237E19E400565B7D /* CameraController.swift */; };
 		CC8D6CDE237E1A2600565B7D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D6CDD237E1A2600565B7D /* Notifications.swift */; };
 		CC8D6CE1237E1A6900565B7D /* VideoFeedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D6CE0237E1A6900565B7D /* VideoFeedState.swift */; };
 		CC8D6CE3237E1AD100565B7D /* CameraControllerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D6CE2237E1AD100565B7D /* CameraControllerError.swift */; };
@@ -34,13 +41,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC12379C23834BA100C83BEB /* AVCaptureVideoOrientation_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureVideoOrientation_Tests.swift; sourceTree = "<group>"; };
+		CC12379E238350FC00C83BEB /* VideoFeedState_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFeedState_Tests.swift; sourceTree = "<group>"; };
+		CC1237A02383555F00C83BEB /* MockSampleBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSampleBuffer.swift; sourceTree = "<group>"; };
+		CC1237A2238356C400C83BEB /* CMSampleBuffer_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMSampleBuffer_Tests.swift; sourceTree = "<group>"; };
+		CC31D8F52383294C009B1287 /* CameraAuthorizationController_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAuthorizationController_Tests.swift; sourceTree = "<group>"; };
+		CC31D8F823832D3D009B1287 /* AVCaptureDeviceCameraAuthorizationInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDeviceCameraAuthorizationInterface.swift; sourceTree = "<group>"; };
+		CC31D8FB23832E7A009B1287 /* AVCaptureDevice_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDevice_Extensions.swift; sourceTree = "<group>"; };
+		CC31D8FD23833084009B1287 /* MockAuthorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthorizer.swift; sourceTree = "<group>"; };
 		CC8D6CBF237E180600565B7D /* iOSRawCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iOSRawCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC8D6CC2237E180600565B7D /* iOSRawCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOSRawCamera.h; sourceTree = "<group>"; };
 		CC8D6CC3237E180600565B7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC8D6CC8237E180600565B7D /* iOSRawCameraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSRawCameraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CC8D6CCD237E180600565B7D /* iOSRawCameraTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSRawCameraTests.swift; sourceTree = "<group>"; };
 		CC8D6CCF237E180600565B7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CC8D6CD9237E19E400565B7D /* iOSRawCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSRawCamera.swift; sourceTree = "<group>"; };
+		CC8D6CD9237E19E400565B7D /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		CC8D6CDD237E1A2600565B7D /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		CC8D6CE0237E1A6900565B7D /* VideoFeedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFeedState.swift; sourceTree = "<group>"; };
 		CC8D6CE2237E1AD100565B7D /* CameraControllerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraControllerError.swift; sourceTree = "<group>"; };
@@ -72,6 +86,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC31D8F723832D29009B1287 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CC31D8F823832D3D009B1287 /* AVCaptureDeviceCameraAuthorizationInterface.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CC31D8FA23832E30009B1287 /* MockObjects */ = {
+			isa = PBXGroup;
+			children = (
+				CC31D8FD23833084009B1287 /* MockAuthorizer.swift */,
+				CC1237A02383555F00C83BEB /* MockSampleBuffer.swift */,
+			);
+			path = MockObjects;
+			sourceTree = "<group>";
+		};
 		CC8D6CB5237E180600565B7D = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +124,7 @@
 		CC8D6CC1237E180600565B7D /* iOSRawCamera */ = {
 			isa = PBXGroup;
 			children = (
+				CC31D8F723832D29009B1287 /* Protocols */,
 				CC8D6CEA237E1E5800565B7D /* Extensions */,
 				CC8D6CDF237E1A5B00565B7D /* Enumerations */,
 				CC8D6CDC237E1A1500565B7D /* Classes */,
@@ -106,8 +138,12 @@
 		CC8D6CCC237E180600565B7D /* iOSRawCameraTests */ = {
 			isa = PBXGroup;
 			children = (
-				CC8D6CCD237E180600565B7D /* iOSRawCameraTests.swift */,
+				CC31D8FA23832E30009B1287 /* MockObjects */,
 				CC8D6CCF237E180600565B7D /* Info.plist */,
+				CC31D8F52383294C009B1287 /* CameraAuthorizationController_Tests.swift */,
+				CC12379C23834BA100C83BEB /* AVCaptureVideoOrientation_Tests.swift */,
+				CC12379E238350FC00C83BEB /* VideoFeedState_Tests.swift */,
+				CC1237A2238356C400C83BEB /* CMSampleBuffer_Tests.swift */,
 			);
 			path = iOSRawCameraTests;
 			sourceTree = "<group>";
@@ -123,7 +159,7 @@
 		CC8D6CDC237E1A1500565B7D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				CC8D6CD9237E19E400565B7D /* iOSRawCamera.swift */,
+				CC8D6CD9237E19E400565B7D /* CameraController.swift */,
 				CC8D6CE8237E1DE800565B7D /* CameraAuthorizationController.swift */,
 			);
 			path = Classes;
@@ -147,6 +183,7 @@
 				CC8D6CEB237E1E7B00565B7D /* AVCaptureVideoOrientation_Extensions.swift */,
 				CC8D6CED237E1ECF00565B7D /* CMSampleBuffer_Extensions.swift */,
 				CC8D6CF3237E207100565B7D /* CVPixelBuffer_Extensions.swift */,
+				CC31D8FB23832E7A009B1287 /* AVCaptureDevice_Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -264,12 +301,14 @@
 				CC8D6CDE237E1A2600565B7D /* Notifications.swift in Sources */,
 				CC8D6CE3237E1AD100565B7D /* CameraControllerError.swift in Sources */,
 				CC8D6CE1237E1A6900565B7D /* VideoFeedState.swift in Sources */,
+				CC31D8FC23832E7A009B1287 /* AVCaptureDevice_Extensions.swift in Sources */,
+				CC31D8F923832D3D009B1287 /* AVCaptureDeviceCameraAuthorizationInterface.swift in Sources */,
 				CC8D6CF4237E207100565B7D /* CVPixelBuffer_Extensions.swift in Sources */,
 				CC8D6CE7237E1D5000565B7D /* CameraRoute.swift in Sources */,
 				CC8D6CF6237E20A400565B7D /* PixelBufferCopyError.swift in Sources */,
 				CC8D6CE9237E1DE800565B7D /* CameraAuthorizationController.swift in Sources */,
 				CC8D6CEE237E1ECF00565B7D /* CMSampleBuffer_Extensions.swift in Sources */,
-				CC8D6CDA237E19E400565B7D /* iOSRawCamera.swift in Sources */,
+				CC8D6CDA237E19E400565B7D /* CameraController.swift in Sources */,
 				CC8D6CF0237E1F1000565B7D /* CMBufferProcessorError.swift in Sources */,
 				CC8D6CEC237E1E7B00565B7D /* AVCaptureVideoOrientation_Extensions.swift in Sources */,
 			);
@@ -279,7 +318,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC8D6CCE237E180600565B7D /* iOSRawCameraTests.swift in Sources */,
+				CC12379D23834BA100C83BEB /* AVCaptureVideoOrientation_Tests.swift in Sources */,
+				CC1237A3238356C400C83BEB /* CMSampleBuffer_Tests.swift in Sources */,
+				CC1237A12383555F00C83BEB /* MockSampleBuffer.swift in Sources */,
+				CC31D8FE23833084009B1287 /* MockAuthorizer.swift in Sources */,
+				CC31D8F62383294C009B1287 /* CameraAuthorizationController_Tests.swift in Sources */,
+				CC12379F238350FC00C83BEB /* VideoFeedState_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

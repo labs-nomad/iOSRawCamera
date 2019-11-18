@@ -7,7 +7,10 @@
 //
 
 public extension AVCaptureVideoOrientation {
-    public init?(deviceOrientation: UIDeviceOrientation) {
+    
+    /// This initalizer will construct the appropriate `AVCaptureVideoOrientation` from the `UIDeviceOrientation`. The main catch is that the left and right cases are mirrored. For example `UIDeviceOrientation.landscapeLeft` turns out `AVCaptureVideoOrientation.landscapeRight`. This constructor was observed to be present in multiple projects from Apple to random git hub projects.
+    /// - Parameter deviceOrientation: A correctly constructed `AVCaptureVideoOrientation`
+    init?(deviceOrientation: UIDeviceOrientation) {
         switch deviceOrientation {
         case .portrait:
             self = .portrait
@@ -22,18 +25,27 @@ public extension AVCaptureVideoOrientation {
         }
     }
     
-    public init(interfaceOrientation: UIInterfaceOrientation) {
+    /// This initalizer will construct the appropriate `AVCaptureVideoOrientation` from the `UIInterfaceOrientation`. Unlike the `UIDeviceOrientation` all the enum cases line up correctly.
+    /// - Parameter interfaceOrientation: A correctly constructed `AVCaptureVideoOrientation`
+    init(interfaceOrientation: UIInterfaceOrientation) {
         switch interfaceOrientation {
-        case .portrait: self = .portrait
-        case .portraitUpsideDown: self = .portraitUpsideDown
-        case .landscapeLeft: self = .landscapeLeft
-        case .landscapeRight: self = .landscapeRight
-        case .unknown: self = .portrait
-        @unknown default: self = .portrait
+        case .portrait:
+            self = .portrait
+        case .portraitUpsideDown:
+            self = .portraitUpsideDown
+        case .landscapeLeft:
+            self = .landscapeLeft
+        case .landscapeRight:
+            self = .landscapeRight
+        case .unknown:
+            self = .portrait
+        @unknown default:
+            self = .portrait
         }
     }
     
-    public func string() -> String {
+    /// Function that will return a human readable string for the `AVCaptureVideoOrientation`
+    func string() -> String {
         switch self {
         case .landscapeLeft:
             return "Landscape Left"
