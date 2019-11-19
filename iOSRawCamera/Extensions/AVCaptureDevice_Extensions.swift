@@ -12,5 +12,15 @@ import Foundation
  
  */
 extension AVCaptureDevice: AVCaptureDeviceCameraAuthorizationInterface {
-    
+    func automaticConfiguration() {
+        if self.isExposureModeSupported(.continuousAutoExposure) {
+            self.exposureMode = .continuousAutoExposure
+        }
+        if self.isFocusModeSupported(.continuousAutoFocus) {
+            self.focusMode = .continuousAutoFocus
+        }
+        if self.isWhiteBalanceModeSupported(.continuousAutoWhiteBalance) {
+            self.whiteBalanceMode = .continuousAutoWhiteBalance
+        }
+    }
 }
