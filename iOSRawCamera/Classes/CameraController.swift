@@ -153,11 +153,12 @@ public class CameraController: NSObject {
     /// - Parameters:
     ///   - sessionPreset: The `AVCaptureSession.Preset` you want. Defaults to `.vga640x480`
     ///   - desiredCameraPosition: The `CameraRoute` you want initalized first. Defaults to `.front`
-    public func setUp(sessionPreset: AVCaptureSession.Preset = .vga640x480, desiredCameraPosition: CameraRoute = .front) throws {
+    ///   - authorization: An object that can determine authorization. Conforms to `AVCaptureDeviceCameraAuthorizationInterface` defaults to `AVCaptureDevice.self`
+    public func setUp(sessionPreset: AVCaptureSession.Preset = .vga640x480, desiredCameraPosition: CameraRoute = .front, authorization: AVCaptureDeviceCameraAuthorizationInterface.Type = AVCaptureDevice.self, authorizationController: CameraAuthorizationController = CameraAuthorizationController()) throws {
         // We want to intercept the Error so that we can set the state of the `CameraController`.
         do {
             //We don't want to continue with the `AVFoundation` set up if we are not authorized
-            try self.preSetupAuthorizationCheck()
+            try self.preSetupAuthorizationCheck(authorization: authorization, authorizationController: authorizationController)
 
             //Change the state object to 'preparing'
             self.videoState = VideoFeedState.preparing
@@ -210,15 +211,15 @@ public class CameraController: NSObject {
     
     //MARK: Internal Functions
     
-    private func preSetupAuthorizationCheck() throws {
+    private func preSetupAuthorizationCheck(authorization: AVCaptureDeviceCameraAuthorizationInterface.Type = AVCaptureDevice.self, authorizationController: CameraAuthorizationController = CameraAuthorizationController()) throws {
         /*
          Use the object that conforms to AVCaptureDeviceAuthorization to check the state of the camera authorization.
          
          If it is not authorized then lets check the state with more detail. Set the state of the camera controller with the error that we encountered.
          */
-        let authorizationController = CameraAuthorizationController()
-        guard authorizationController.isCameraAuthorized() == true else {
-            switch authorizationController.authorizationStatus() {
+        
+        guard authorizationController.isCameraAuthorized(authorization: authorization) == true else {
+            switch authorizationController.authorizationStatus(authorization: authorization) {
             case .denied:
                 let error = CameraControllerError.permissionDenied
                 throw error
@@ -362,7 +363,7 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     public func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-       //print("Dropped Sample Buffer")
+       
     }
 }
 

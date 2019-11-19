@@ -32,6 +32,7 @@
 		CC8D6CF0237E1F1000565B7D /* CMBufferProcessorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D6CEF237E1F1000565B7D /* CMBufferProcessorError.swift */; };
 		CC8D6CF4237E207100565B7D /* CVPixelBuffer_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D6CF3237E207100565B7D /* CVPixelBuffer_Extensions.swift */; };
 		CC8D6CF6237E20A400565B7D /* PixelBufferCopyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D6CF5237E20A400565B7D /* PixelBufferCopyError.swift */; };
+		CCEE0CBC23845E000087ED96 /* CameraController_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEE0CBB23845E000087ED96 /* CameraController_Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		CC8D6CEF237E1F1000565B7D /* CMBufferProcessorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMBufferProcessorError.swift; sourceTree = "<group>"; };
 		CC8D6CF3237E207100565B7D /* CVPixelBuffer_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVPixelBuffer_Extensions.swift; sourceTree = "<group>"; };
 		CC8D6CF5237E20A400565B7D /* PixelBufferCopyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelBufferCopyError.swift; sourceTree = "<group>"; };
+		CCEE0CBB23845E000087ED96 /* CameraController_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController_Tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 				CC12379C23834BA100C83BEB /* AVCaptureVideoOrientation_Tests.swift */,
 				CC12379E238350FC00C83BEB /* VideoFeedState_Tests.swift */,
 				CC1237A2238356C400C83BEB /* CMSampleBuffer_Tests.swift */,
+				CCEE0CBB23845E000087ED96 /* CameraController_Tests.swift */,
 			);
 			path = iOSRawCameraTests;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCEE0CBC23845E000087ED96 /* CameraController_Tests.swift in Sources */,
 				CC12379D23834BA100C83BEB /* AVCaptureVideoOrientation_Tests.swift in Sources */,
 				CC1237A3238356C400C83BEB /* CMSampleBuffer_Tests.swift in Sources */,
 				CC1237A12383555F00C83BEB /* MockSampleBuffer.swift in Sources */,
