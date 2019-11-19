@@ -20,7 +20,7 @@ public struct CameraAsyncController {
     let serialDispatchQueue = DispatchQueue(label: QueueNames().cameraConfigurationQueue)
     
     //MARK: Init
-    init() {
+    public init() {
         
     }
     
