@@ -8,48 +8,71 @@
 
 import Foundation
 
-class InputManager: NSObject {
-    var currentCameraInput: AVCaptureDeviceInput?
+/// Class that will let
+public class InputManager: NSObject {
+    //MARK: Public Properties
+    public typealias FrameRateRange = (min: Float64, max: Float64)
+    public typealias FactorAndLevel = (factor: AVCaptureDevice.SystemPressureState.Factors, level: AVCaptureDevice.SystemPressureState.Level)
+    
+    //MARK: Private Properties
+    var keyValueObservations: [NSKeyValueObservation] = []
+    
+
+    //MARK: Init
     
     
-    public func setFrameRate(rate: Int32) throws {
+    //MARK: Public Functions
+    public func setFrameRate(forInput input: AVCaptureDeviceInput, rate: Int32) throws {
         let newTime = CMTimeMake(value: 1, timescale: rate)
-        let seconds = CMTimeGetSeconds(newTime)
-        print("New Frame Rate; \(seconds)")
-        try self.currentCameraInput?.device.lockForConfiguration()
-        self.currentCameraInput?.device.activeVideoMaxFrameDuration = newTime
-        self.currentCameraInput?.device.activeVideoMinFrameDuration = newTime
-        self.currentCameraInput?.device.unlockForConfiguration()
+        try input.device.lockForConfiguration()
+        input.device.activeVideoMaxFrameDuration = newTime
+        input.device.activeVideoMinFrameDuration = newTime
+        input.device.unlockForConfiguration()
     }
     
-    public typealias FrameRateRange = (min: Float64, max: Float64)
-    
     //https://warrenmoore.net/understanding-cmtime
-    public func currentFrameRate() -> FrameRateRange? {
-        guard let min = self.currentCameraInput?.device.activeVideoMinFrameDuration, let max = self.currentCameraInput?.device.activeVideoMaxFrameDuration else {
-            return nil
-        }
+    public func currentFrameRate(forInput input: AVCaptureDeviceInput) -> FrameRateRange {
+        let min = input.device.activeVideoMinFrameDuration
+        let max = input.device.activeVideoMaxFrameDuration
         return (CMTimeGetSeconds(min), CMTimeGetSeconds(max))
     }
     
-    public func availableFrameRateRange() {
-        guard let frameRateRanges = self.currentCameraInput?.device.activeFormat.videoSupportedFrameRateRanges else {
-            print("No Frame Rate info available")
-            return
-        }
-        
+    public func availableFrameRateRange(forInput input: AVCaptureDeviceInput) -> FrameRateRange {
+        let frameRateRanges = input.device.activeFormat.videoSupportedFrameRateRanges
+        var min: Float64?
+        var max: Float64?
         for range in frameRateRanges {
-            print("Max Frame Rate: \(CMTimeGetSeconds(range.maxFrameDuration))")
-            print("Min Frame Rate: \(CMTimeGetSeconds(range.minFrameDuration))")
-            print("Max Frame Rate: \(range.maxFrameDuration)")
-            print("Min Frame Rate: \(range.minFrameDuration)")
+            if min == nil {
+                min = range.minFrameRate
+            }else if min! < range.minFrameRate {
+                min = range.minFrameRate
+            }
+            if max == nil {
+                max = range.maxFrameRate
+            }else if max! > range.maxFrameRate {
+                max = range.maxFrameRate
+            }
         }
+        guard let finalMin = min, let finalMax = max else {
+            return (0, 0)
+        }
+        return (finalMin, finalMax)
     }
     
-    public func getSystemPressureReading() -> (AVCaptureDevice.SystemPressureState.Factors, AVCaptureDevice.SystemPressureState.Level)? {
-        guard let factor = self.currentCameraInput?.device.systemPressureState.factors, let level = self.currentCameraInput?.device.systemPressureState.level else {
-            return nil
-        }
+    
+    
+    public func getSystemPressureReading(forInput input: AVCaptureDeviceInput) -> FactorAndLevel {
+        let factor = input.device.systemPressureState.factors
+        let level = input.device.systemPressureState.level
         return (factor, level)
     }
+    
+    
+//    public func startObserving(input: AVCaptureDeviceInput) {
+//        let observable: AVCaptureDeviceInput = input
+//        let observations = self.observe(\.observable.device.systemPressureState, options: .new) { _, change in
+//            guard let systemPressureState = change.newValue else { return }
+//        }
+//    }
+    
 }
