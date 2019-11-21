@@ -14,7 +14,6 @@
 		CC1237A52383629100C83BEB /* CameraAsyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1237A42383629100C83BEB /* CameraAsyncController.swift */; };
 		CC1237A82383657400C83BEB /* QueueNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1237A72383657400C83BEB /* QueueNames.swift */; };
 		CC1237AA238377D400C83BEB /* AVCaptureDeviceArray_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1237A9238377D400C83BEB /* AVCaptureDeviceArray_Extensions.swift */; };
-		CC1237AC238388E200C83BEB /* InputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1237AB238388E200C83BEB /* InputManager.swift */; };
 		CC31D8F62383294C009B1287 /* CameraAuthorizationController_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31D8F52383294C009B1287 /* CameraAuthorizationController_Tests.swift */; };
 		CC31D8F923832D3D009B1287 /* AVCaptureDeviceCameraAuthorizationInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31D8F823832D3D009B1287 /* AVCaptureDeviceCameraAuthorizationInterface.swift */; };
 		CC31D8FC23832E7A009B1287 /* AVCaptureDevice_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31D8FB23832E7A009B1287 /* AVCaptureDevice_Extensions.swift */; };
@@ -32,6 +31,9 @@
 		CC8D6CF0237E1F1000565B7D /* CMBufferProcessorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D6CEF237E1F1000565B7D /* CMBufferProcessorError.swift */; };
 		CC8D6CF4237E207100565B7D /* CVPixelBuffer_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D6CF3237E207100565B7D /* CVPixelBuffer_Extensions.swift */; };
 		CC8D6CF6237E20A400565B7D /* PixelBufferCopyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D6CF5237E20A400565B7D /* PixelBufferCopyError.swift */; };
+		CC9F52CF23874D030010F03D /* FrameRateManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F52CE23874D030010F03D /* FrameRateManagable.swift */; };
+		CC9F52D123874DBB0010F03D /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F52D023874DBB0010F03D /* TypeAliases.swift */; };
+		CC9F52D32387561E0010F03D /* SetFrameRateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F52D22387561E0010F03D /* SetFrameRateError.swift */; };
 		CCEE0CBC23845E000087ED96 /* CameraController_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEE0CBB23845E000087ED96 /* CameraController_Tests.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,7 +55,6 @@
 		CC1237A42383629100C83BEB /* CameraAsyncController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAsyncController.swift; sourceTree = "<group>"; };
 		CC1237A72383657400C83BEB /* QueueNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueNames.swift; sourceTree = "<group>"; };
 		CC1237A9238377D400C83BEB /* AVCaptureDeviceArray_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDeviceArray_Extensions.swift; sourceTree = "<group>"; };
-		CC1237AB238388E200C83BEB /* InputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputManager.swift; sourceTree = "<group>"; };
 		CC31D8F52383294C009B1287 /* CameraAuthorizationController_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAuthorizationController_Tests.swift; sourceTree = "<group>"; };
 		CC31D8F823832D3D009B1287 /* AVCaptureDeviceCameraAuthorizationInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDeviceCameraAuthorizationInterface.swift; sourceTree = "<group>"; };
 		CC31D8FB23832E7A009B1287 /* AVCaptureDevice_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDevice_Extensions.swift; sourceTree = "<group>"; };
@@ -74,6 +75,9 @@
 		CC8D6CEF237E1F1000565B7D /* CMBufferProcessorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMBufferProcessorError.swift; sourceTree = "<group>"; };
 		CC8D6CF3237E207100565B7D /* CVPixelBuffer_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVPixelBuffer_Extensions.swift; sourceTree = "<group>"; };
 		CC8D6CF5237E20A400565B7D /* PixelBufferCopyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelBufferCopyError.swift; sourceTree = "<group>"; };
+		CC9F52CE23874D030010F03D /* FrameRateManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameRateManagable.swift; sourceTree = "<group>"; };
+		CC9F52D023874DBB0010F03D /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
+		CC9F52D22387561E0010F03D /* SetFrameRateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFrameRateError.swift; sourceTree = "<group>"; };
 		CCEE0CBB23845E000087ED96 /* CameraController_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController_Tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				CC31D8F823832D3D009B1287 /* AVCaptureDeviceCameraAuthorizationInterface.swift */,
+				CC9F52CE23874D030010F03D /* FrameRateManagable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				CC8D6CDD237E1A2600565B7D /* Notifications.swift */,
+				CC9F52D023874DBB0010F03D /* TypeAliases.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -182,7 +188,6 @@
 				CC8D6CD9237E19E400565B7D /* CameraController.swift */,
 				CC8D6CE8237E1DE800565B7D /* CameraAuthorizationController.swift */,
 				CC1237A42383629100C83BEB /* CameraAsyncController.swift */,
-				CC1237AB238388E200C83BEB /* InputManager.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 				CC8D6CE6237E1D5000565B7D /* CameraRoute.swift */,
 				CC8D6CEF237E1F1000565B7D /* CMBufferProcessorError.swift */,
 				CC8D6CF5237E20A400565B7D /* PixelBufferCopyError.swift */,
+				CC9F52D22387561E0010F03D /* SetFrameRateError.swift */,
 			);
 			path = Enumerations;
 			sourceTree = "<group>";
@@ -325,11 +331,13 @@
 				CC8D6CE3237E1AD100565B7D /* CameraControllerError.swift in Sources */,
 				CC8D6CE1237E1A6900565B7D /* VideoFeedState.swift in Sources */,
 				CC31D8FC23832E7A009B1287 /* AVCaptureDevice_Extensions.swift in Sources */,
+				CC9F52CF23874D030010F03D /* FrameRateManagable.swift in Sources */,
 				CC31D8F923832D3D009B1287 /* AVCaptureDeviceCameraAuthorizationInterface.swift in Sources */,
 				CC8D6CF4237E207100565B7D /* CVPixelBuffer_Extensions.swift in Sources */,
+				CC9F52D123874DBB0010F03D /* TypeAliases.swift in Sources */,
 				CC8D6CE7237E1D5000565B7D /* CameraRoute.swift in Sources */,
 				CC8D6CF6237E20A400565B7D /* PixelBufferCopyError.swift in Sources */,
-				CC1237AC238388E200C83BEB /* InputManager.swift in Sources */,
+				CC9F52D32387561E0010F03D /* SetFrameRateError.swift in Sources */,
 				CC8D6CE9237E1DE800565B7D /* CameraAuthorizationController.swift in Sources */,
 				CC1237AA238377D400C83BEB /* AVCaptureDeviceArray_Extensions.swift in Sources */,
 				CC8D6CEE237E1ECF00565B7D /* CMSampleBuffer_Extensions.swift in Sources */,

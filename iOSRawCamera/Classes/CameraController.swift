@@ -13,7 +13,7 @@ public class CameraController: NSObject {
     public private(set) var videoState = VideoFeedState.notPrepared(nil) {
         didSet {
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: VideoFeedStateChangedNotification, object: self.videoState)
+                self.notificationCenter.post(name: VideoFeedStateChangedNotification, object: self.videoState)
             }
         }
     }
@@ -48,8 +48,12 @@ public class CameraController: NSObject {
         }
     }
     
-    /// The current `AVCaptureDeviceInput` that is feeding the camera
-    public private(set) var currentCameraInput: AVCaptureDeviceInput?
+    /// The current `AVCaptureDeviceInput` that is feeding the camera. If this changes internally, ususlly by the user switching cameras, it will fire a `DeviceInputChangedNotification` notification
+    public private(set) var currentCameraInput: AVCaptureDeviceInput? {
+        didSet {
+            self.notificationCenter.post(name: DeviceInputChangedNotification, object: self.currentCameraInput)
+        }
+    }
     
     /// When the delegate receives a `CVPixelBuffer`should we make a copy of it before sending it into the the `NewCameraBufferNotification`
     public var shouldCopyBuffer: Bool = true
@@ -67,11 +71,13 @@ public class CameraController: NSObject {
     
     var currentDeviceOrientation: UIDeviceOrientation = .unknown
     
+    let notificationCenter: NotificationCenter
     //MARK: Init
-    public override init() {
+    public init(device: UIDevice = UIDevice.current, notificationCenter: NotificationCenter = NotificationCenter.default) {
+        self.currentDeviceOrientation = device.orientation
+        self.notificationCenter = notificationCenter
         super.init()
-        self.currentDeviceOrientation = UIDevice.current.orientation
-        NotificationCenter.default.addObserver(self, selector: #selector(self.deviceRotated(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)
+        self.notificationCenter.addObserver(self, selector: #selector(self.deviceRotated(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     //MARK: Notifications
@@ -85,7 +91,7 @@ public class CameraController: NSObject {
         do {
             try self.updateCaptureConnections(forOrientation: device.orientation)
         }catch{
-            NotificationCenter.default.post(name: CameraControllerErrorNotification, object: error)
+            self.notificationCenter.post(name: CameraControllerErrorNotification, object: error)
         }
     }
 
@@ -357,12 +363,12 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
             let buffer = try sampleBuffer.cvPixelBuffer()
             if self.shouldCopyBuffer == true {
                 let bufferCopy = try buffer.copy()
-                NotificationCenter.default.post(name: NewCameraBufferNotification, object: bufferCopy)
+                self.notificationCenter.post(name: NewCameraBufferNotification, object: bufferCopy)
             }else {
-                NotificationCenter.default.post(name: NewCameraBufferNotification, object: buffer)
+                self.notificationCenter.post(name: NewCameraBufferNotification, object: buffer)
             }
         }catch{
-            NotificationCenter.default.post(name: CameraControllerErrorNotification, object: error)
+            self.notificationCenter.post(name: CameraControllerErrorNotification, object: error)
         }
     }
     

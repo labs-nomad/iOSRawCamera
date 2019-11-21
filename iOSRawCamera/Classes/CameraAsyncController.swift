@@ -12,8 +12,9 @@ import Foundation
 /// This controller helps you do ASYNC processes with the `CameraController` according to Apples best practice documentation. This controller is de-coupled from the `CameraController` because there are no assumptions  made on how you want to manage yoru background threads. This controller is available for convenience.
 public struct CameraAsyncController {
     //MARK: Public Properties
-    ///Callback definition for the `setUp` function
+    ///Callback definition for an Async call that could contain an error
     public typealias ErrorCallback = ((_ error: Error?) -> Void)
+    ///Callback definition for an Async call
     public typealias EmptyCallback = (() -> Void)
     
     //MARK: Private Properties
@@ -47,6 +48,11 @@ public struct CameraAsyncController {
     }
     
     
+    /// Starts the Camera Controller on a background Serial Dispatch Queue
+    /// - Parameters:
+    ///   - controller: The camera controller that you want to start
+    ///   - callback: The callback that tells you when the `CameraController` was sucessfully started
+    ///   - returnQueue: The `DispatchQueue` that you want the call to return on. Defaults to the man UI Queue
     public func startAsync(cameraController controller: CameraController, callback: EmptyCallback? = nil, returnQueue: DispatchQueue = DispatchQueue.main) {
         self.serialDispatchQueue.async {
             controller.startRunning()
@@ -57,6 +63,11 @@ public struct CameraAsyncController {
     }
     
     
+    /// Async stops the camera from running
+    /// - Parameters:
+    ///   - controller: The camera controller that you want to stop
+    ///   - callback: The callback that tells you when the `CameraController` was sucessfully started
+    ///   - returnQueue: The `DispatchQueue` that you want the call to return on. Defaults to the man UI Queue
     public func stopAsync(cameraController controller: CameraController, callback: EmptyCallback? = nil, returnQueue: DispatchQueue = DispatchQueue.main) {
         self.serialDispatchQueue.async {
             controller.stopRunning()
@@ -66,6 +77,11 @@ public struct CameraAsyncController {
         }
     }
     
+    /// Async resets the camera by callign stop then start on the `AVFoundation` `AVCaptureSession`
+    /// - Parameters:
+    ///   - controller: The camera controller that you want to restart
+    ///   - callback: The callback that tells you when the `CameraController` was sucessfully started
+    ///   - returnQueue: The `DispatchQueue` that you want the call to return on. Defaults to the man UI Queue
     public func resetAsync(cameraController controller: CameraController, callback: EmptyCallback? = nil, returnQueue: DispatchQueue = DispatchQueue.main) {
         self.serialDispatchQueue.async {
             controller.resetCaptureSession()
@@ -75,6 +91,11 @@ public struct CameraAsyncController {
         }
     }
     
+    /// Async change the running state of the `CameraController`
+    /// - Parameters:
+    ///   - controller: The camera controller that you want to toggle
+    ///   - callback: The callback that tells you when the `CameraController` was sucessfully started
+    ///   - returnQueue: The `DispatchQueue` that you want the call to return on. Defaults to the man UI Queue
     public func toggleAsync(cameraController controller: CameraController, callback: EmptyCallback? = nil, returnQueue: DispatchQueue = DispatchQueue.main) {
         self.serialDispatchQueue.async {
             controller.toggleRunning()
@@ -85,6 +106,11 @@ public struct CameraAsyncController {
     }
     
     
+    /// Switch the video feed from the front to back or vice versa. Will return an `Error` if something went wrong.
+    /// - Parameters:
+    ///   - controller: The camera controller that you want to swap cameras
+    ///   - callback: The callback that tells you when the `CameraController` was sucessfully started
+    ///   - returnQueue: The `DispatchQueue` that you want the call to return on. Defaults to the man UI Queue
     public func swapCamerasAsync(cameraController controller: CameraController, callback: ErrorCallback? = nil, returnQueue: DispatchQueue = DispatchQueue.main) {
         self.serialDispatchQueue.async {
             do {
