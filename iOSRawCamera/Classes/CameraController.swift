@@ -35,9 +35,6 @@ public class CameraController: NSObject {
         return self.captureSession.isInterrupted
     }
     
-    /// Conveniently get the latest `CVPixelBuffer`
-    public var currentBuffer: CVPixelBuffer?
-    
     /// Get the current camera route
     public internal(set) var currentCameraPosition: CameraRoute = CameraRoute.front
     
@@ -51,7 +48,11 @@ public class CameraController: NSObject {
         }
     }
     
+    /// The current `AVCaptureDeviceInput` that is feeding the camera
     public private(set) var currentCameraInput: AVCaptureDeviceInput?
+    
+    /// When the delegate receives a `CVPixelBuffer`should we make a copy of it before sending it into the the `NewCameraBufferNotification`
+    public var shouldCopyBuffer: Bool = true
     
     //MARK: Private properties
     // A tuple that represents the front and back cameras that I expect to discover.
@@ -101,7 +102,6 @@ public class CameraController: NSObject {
     public func stopRunning() {
         self.captureSession.stopRunning()
         self.videoState = .prepared
-        self.currentBuffer = nil
     }
     
     /// Convenience function that will switch the session from running to prepared or vice versa.
@@ -354,9 +354,13 @@ public class CameraController: NSObject {
 extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         do {
-            let buffer = try sampleBuffer.cvPixelBuffer().copy()
-            self.currentBuffer = buffer
-            NotificationCenter.default.post(name: NewCameraBufferNotification, object: buffer)
+            let buffer = try sampleBuffer.cvPixelBuffer()
+            if self.shouldCopyBuffer == true {
+                let bufferCopy = try buffer.copy()
+                NotificationCenter.default.post(name: NewCameraBufferNotification, object: bufferCopy)
+            }else {
+                NotificationCenter.default.post(name: NewCameraBufferNotification, object: buffer)
+            }
         }catch{
             NotificationCenter.default.post(name: CameraControllerErrorNotification, object: error)
         }
