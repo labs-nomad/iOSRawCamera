@@ -71,12 +71,12 @@ public class CameraController: NSObject {
     
     var currentDeviceOrientation: UIDeviceOrientation = .unknown
     
-    let notificationCenter: NotificationCenter
+    weak var notificationCenter: NotificationCenter!
     //MARK: Init
-    public init(device: UIDevice = UIDevice.current, notificationCenter: NotificationCenter = NotificationCenter.default) {
-        self.currentDeviceOrientation = device.orientation
-        self.notificationCenter = notificationCenter
+    public override init() {
         super.init()
+        self.currentDeviceOrientation = UIDevice.current.orientation
+        self.notificationCenter = NotificationCenter.default
         self.notificationCenter.addObserver(self, selector: #selector(self.deviceRotated(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
