@@ -7,9 +7,53 @@
 //
 
 public extension CVPixelBuffer {
+    /// Computed Property to return a `UIImage` from a `CVPixelBuffer`. Makes a `CIImage` from the `CVPixelBuffer` then makes and returns a `UIImage` from a `CIImage`.
+    var uiImage: UIImage {
+        let ciImage = CIImage(cvImageBuffer: self)
+        let uiImage = UIImage(ciImage: ciImage)
+        return uiImage
+    }
+    
+    
+    /// Computed property that constructs a `CIImage` from the `CVPixelBuffer` using the apple provided constructor.
+    var ciImage: CIImage {
+        let ciImage = CIImage(cvImageBuffer: self)
+        return ciImage
+    }
+    
+    
+    /**
+     The `.isValid` function checks these three things:
+     
+     1) The pixel width of the buffer is greater then 0
+     2) The pixel height of the buffer is greater then 0
+     3) The data size of the buffer is greater then 0
+     4) The bytes per row value of the buffer is greater then 0
+     
+     All these checks are meant to guard against the crash I was seeing where the last line of the stack trace was `CVPixelBufferGetWidth + 20`. So, not a complete shot in the dark.
+    */
+    var isValid: Bool {
+        let cvBufferWidth = CVPixelBufferGetWidth(self)
+        let cvBufferHeight = CVPixelBufferGetHeight(self)
+        let size = CVPixelBufferGetDataSize(self)
+        let bytesPerRow = CVPixelBufferGetBytesPerRow(self)
+        
+        guard cvBufferWidth > 0 && cvBufferHeight > 0 && size > 0 && bytesPerRow > 0 else {
+            return false
+        }
+        
+        return true
+    }
+    
+   
+    
     //https://stackoverflow.com/questions/53132611/copy-a-cvpixelbuffer-on-any-ios-device
+    /// Creates a copy of the CV Pixel buffer. Can handld formates with and with out planes.
     func copy() throws -> CVPixelBuffer {
-        precondition(CFGetTypeID(self) == CVPixelBufferGetTypeID(), "copy() cannot be called on a non-CVPixelBuffer")
+        //copy() cannot be called on a non-CVPixelBuffer
+        guard CFGetTypeID(self) == CVPixelBufferGetTypeID() else {
+            throw PixelBufferCopyError.notAPixelBuffer
+        }
         
         var _copy: CVPixelBuffer?
         

@@ -9,4 +9,5 @@
 /// An error that can happen when trying to copy the Pixel Buffer to new memory.
 public enum PixelBufferCopyError: Error {
     case allocationFailed
+    case notAPixelBuffer
 }

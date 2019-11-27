@@ -296,6 +296,19 @@ public class CameraController: NSObject {
         return output
     }
     
+    private func getVideoFileOutput() -> AVCaptureMovieFileOutput? {
+        let output: AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
+        guard let connection = output.connection(with: AVMediaType.video) else {
+            return nil
+        }
+        if output.availableVideoCodecTypes.contains(AVVideoCodecType.h264) {
+            let outputSettings: [String: Any] = [AVVideoCodecKey: AVVideoCodecType.h264]
+            output.setOutputSettings(outputSettings, for: connection)
+        }
+    
+        return output
+    }
+    
     
     private func resetInputs(desiredDevices: DesiredDevices) throws -> AVCaptureDeviceInput {
         switch self.currentCameraPosition {

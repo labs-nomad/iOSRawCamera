@@ -7,6 +7,13 @@
 //
 
 public extension CMSampleBuffer {
+    
+    /// Returns the camera intrtinsics to pass to core vision as options.
+    var cameraIntrinsics: CFTypeRef? {
+        return CMGetAttachment(self, key: kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, attachmentModeOut: nil)
+    }
+    
+    
     /// Converts the `CMSampleBuffer` into a `CVPixelBuffer`.
     ///
     /// - Returns: A `CVPixelBuffer` that uses the `CMSampleBufferGetImageBuffer` constructor.
