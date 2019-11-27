@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name = 'iOSRawCamera'
-    s.version = '1.0.14'
+    s.version = '1.0.15'
     s.summary = 'Get the raw camera feed for Computer Vision Tasks'
     s.description = <<-DESC 
     This pod lets you access the CVPixelBuffer object in accordance with Apples Documentation.
