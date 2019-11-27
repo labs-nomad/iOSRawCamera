@@ -32,7 +32,7 @@ public struct CameraAsyncController {
     ///   - controller: The `CameraController` you want to prepare
     ///   - finished: Once the `CameraController` is prepared then we call this on the return queue
     ///   - returnQueue: The Queue that you want the `SetUpCallback` to be called back on. Defaults to `DispatchQueue.main`
-    public func setUpAsync(cameraController controller: CameraController, sessionPreset: AVCaptureSession.Preset = .vga640x480, desiredCameraPosition: CameraRoute = .front, authorization: AVCaptureDeviceCameraAuthorizationInterface.Type = AVCaptureDevice.self, authorizationController: CameraAuthorizationController = CameraAuthorizationController(), finished: ErrorCallback? = nil, returnQueue: DispatchQueue = DispatchQueue.main) {
+    public func setUpAsync(cameraController controller: CameraController, sessionPreset: AVCaptureSession.Preset = .vga640x480, desiredCameraPosition: iOSRawCameraRoute = .front, authorization: AVCaptureDeviceCameraAuthorizationInterface.Type = AVCaptureDevice.self, authorizationController: CameraAuthorizationController = CameraAuthorizationController(), finished: ErrorCallback? = nil, returnQueue: DispatchQueue = DispatchQueue.main) {
         self.serialDispatchQueue.async {
             do {
                 try controller.setUp(sessionPreset: sessionPreset, desiredCameraPosition: desiredCameraPosition, authorization: authorization, authorizationController: authorizationController)

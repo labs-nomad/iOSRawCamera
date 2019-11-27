@@ -7,18 +7,10 @@
 //
 
 
-public enum CameraRoute: Int {
+/// The simplified route that you want the camera of the iOS Device
+public enum iOSRawCameraRoute: Int {
+    ///The front facing camera if available
     case front = 0
+    ///The back camera if available
     case back = 1
-    
-    public init?(postgresString string: String) {
-        switch string {
-        case "front":
-            self = .front
-        case "back":
-            self = .back
-        default:
-            return nil
-        }
-    }
 }

@@ -36,15 +36,15 @@ public class CameraController: NSObject {
     }
     
     /// Get the current camera route
-    public internal(set) var currentCameraPosition: CameraRoute = CameraRoute.front
+    public internal(set) var currentCameraPosition: iOSRawCameraRoute = iOSRawCameraRoute.front
     
     /// The camera position opposite the `.currentCameraPosition`
-    public var oppositeCameraPosition: CameraRoute {
+    public var oppositeCameraPosition: iOSRawCameraRoute {
         switch self.currentCameraPosition {
         case .back:
-            return CameraRoute.front
+            return iOSRawCameraRoute.front
         case .front:
-            return CameraRoute.back
+            return iOSRawCameraRoute.back
         }
     }
     
@@ -158,9 +158,9 @@ public class CameraController: NSObject {
     /// After initalization this object needs to go configure the `AVCaptureSession`. This function checks authorization, initalizes the `AVCaptureSession`, discovers available devices, sets them according to the desired comera position, orients the flow of data according to the UIDeviceOrientation, and sets the video feed state to `.prepared`
     /// - Parameters:
     ///   - sessionPreset: The `AVCaptureSession.Preset` you want. Defaults to `.vga640x480`
-    ///   - desiredCameraPosition: The `CameraRoute` you want initalized first. Defaults to `.front`
+    ///   - desiredCameraPosition: The `iOSRawCameraRoute` you want initalized first. Defaults to `.front`
     ///   - authorization: An object that can determine authorization. Conforms to `AVCaptureDeviceCameraAuthorizationInterface` defaults to `AVCaptureDevice.self`
-    public func setUp(sessionPreset: AVCaptureSession.Preset = .vga640x480, desiredCameraPosition: CameraRoute = .front, authorization: AVCaptureDeviceCameraAuthorizationInterface.Type = AVCaptureDevice.self, authorizationController: CameraAuthorizationController = CameraAuthorizationController()) throws {
+    public func setUp(sessionPreset: AVCaptureSession.Preset = .vga640x480, desiredCameraPosition: iOSRawCameraRoute = .front, authorization: AVCaptureDeviceCameraAuthorizationInterface.Type = AVCaptureDevice.self, authorizationController: CameraAuthorizationController = CameraAuthorizationController()) throws {
         // We want to intercept the Error so that we can set the state of the `CameraController`.
         do {
             //We don't want to continue with the `AVFoundation` set up if we are not authorized

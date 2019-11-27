@@ -21,26 +21,6 @@ public enum JPEGQuality: CGFloat {
     case high    = 0.75
     case highest = 1
     
-    /// Initalizer that will map the postgres enum string from our database to the correct swift enum
-    ///
-    /// - Parameter string: The postgres string from the database
-    public init?(postgresString string: String) {
-        switch string {
-        case "lowest":
-            self = .lowest
-        case "low":
-            self = .low
-        case "medium":
-            self = .medium
-        case "high":
-            self = .high
-        case "highest":
-            self = .highest
-        default:
-            return nil
-        }
-    }
-    
     //MARK: Functions
     
     /// <#Description#>
@@ -56,21 +36,6 @@ public enum JPEGQuality: CGFloat {
             return "Large Size"
         case .highest:
             return "Largest Size"
-        }
-    }
-    
-    func postgresString() -> String {
-        switch self {
-        case .lowest:
-            return "lowest"
-        case .low:
-            return "low"
-        case .medium:
-            return "medium"
-        case .high:
-            return "high"
-        case .highest:
-            return "highest"
         }
     }
 }
