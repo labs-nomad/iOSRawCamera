@@ -23,8 +23,8 @@ public enum JPEGQuality: CGFloat {
     
     //MARK: Functions
     
-    /// <#Description#>
-    func string() -> String {
+    /// Get a human redable string for this enum.
+    public func string() -> String {
         switch self {
         case .lowest:
             return "Smallest Size"
