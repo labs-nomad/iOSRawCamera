@@ -24,6 +24,10 @@
 		CC31D8F923832D3D009B1287 /* AVCaptureDeviceCameraAuthorizationInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31D8F823832D3D009B1287 /* AVCaptureDeviceCameraAuthorizationInterface.swift */; };
 		CC31D8FC23832E7A009B1287 /* AVCaptureDevice_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31D8FB23832E7A009B1287 /* AVCaptureDevice_Extensions.swift */; };
 		CC31D8FE23833084009B1287 /* MockAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31D8FD23833084009B1287 /* MockAuthorizer.swift */; };
+		CC35623423F8830B00DF2C56 /* AudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35623323F8830B00DF2C56 /* AudioController.swift */; };
+		CC35623623F8874300DF2C56 /* AudioAuthorizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35623523F8874300DF2C56 /* AudioAuthorizationController.swift */; };
+		CC35623823F887DB00DF2C56 /* SFAudioAuthorizationInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35623723F887DB00DF2C56 /* SFAudioAuthorizationInterface.swift */; };
+		CC35623A23F8893300DF2C56 /* SFSpeechRecognizer_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35623923F8893300DF2C56 /* SFSpeechRecognizer_Extensions.swift */; };
 		CC8D6CC9237E180600565B7D /* iOSRawCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8D6CBF237E180600565B7D /* iOSRawCamera.framework */; };
 		CC8D6CD0237E180600565B7D /* iOSRawCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = CC8D6CC2237E180600565B7D /* iOSRawCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CC8D6CDA237E19E400565B7D /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D6CD9237E19E400565B7D /* CameraController.swift */; };
@@ -71,6 +75,10 @@
 		CC31D8F823832D3D009B1287 /* AVCaptureDeviceCameraAuthorizationInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDeviceCameraAuthorizationInterface.swift; sourceTree = "<group>"; };
 		CC31D8FB23832E7A009B1287 /* AVCaptureDevice_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDevice_Extensions.swift; sourceTree = "<group>"; };
 		CC31D8FD23833084009B1287 /* MockAuthorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthorizer.swift; sourceTree = "<group>"; };
+		CC35623323F8830B00DF2C56 /* AudioController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioController.swift; sourceTree = "<group>"; };
+		CC35623523F8874300DF2C56 /* AudioAuthorizationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAuthorizationController.swift; sourceTree = "<group>"; };
+		CC35623723F887DB00DF2C56 /* SFAudioAuthorizationInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFAudioAuthorizationInterface.swift; sourceTree = "<group>"; };
+		CC35623923F8893300DF2C56 /* SFSpeechRecognizer_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSpeechRecognizer_Extensions.swift; sourceTree = "<group>"; };
 		CC8D6CBF237E180600565B7D /* iOSRawCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iOSRawCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC8D6CC2237E180600565B7D /* iOSRawCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOSRawCamera.h; sourceTree = "<group>"; };
 		CC8D6CC3237E180600565B7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,6 +133,7 @@
 			children = (
 				CC31D8F823832D3D009B1287 /* AVCaptureDeviceCameraAuthorizationInterface.swift */,
 				CC9F52CE23874D030010F03D /* FrameRateManagable.swift */,
+				CC35623723F887DB00DF2C56 /* SFAudioAuthorizationInterface.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -200,6 +209,8 @@
 				CC8D6CD9237E19E400565B7D /* CameraController.swift */,
 				CC8D6CE8237E1DE800565B7D /* CameraAuthorizationController.swift */,
 				CC1237A42383629100C83BEB /* CameraAsyncController.swift */,
+				CC35623323F8830B00DF2C56 /* AudioController.swift */,
+				CC35623523F8874300DF2C56 /* AudioAuthorizationController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -231,6 +242,7 @@
 				CC037FF6238F0BAF0017744B /* SystemPressureStateFactors_Extension.swift */,
 				CC037FF8238F0BE30017744B /* SystemPressureStateLevel_Extensions.swift */,
 				CC037FFA238F0C010017744B /* InterruptionReason_Extension.swift */,
+				CC35623923F8893300DF2C56 /* SFSpeechRecognizer_Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -365,11 +377,15 @@
 				CC037FF7238F0BAF0017744B /* SystemPressureStateFactors_Extension.swift in Sources */,
 				CC1237A52383629100C83BEB /* CameraAsyncController.swift in Sources */,
 				CC1237A82383657400C83BEB /* QueueNames.swift in Sources */,
+				CC35623623F8874300DF2C56 /* AudioAuthorizationController.swift in Sources */,
 				CC037FF1238F095F0017744B /* CIImage_Extensions.swift in Sources */,
 				CC037FF3238F09900017744B /* JPEGQuality.swift in Sources */,
 				CC8D6CF0237E1F1000565B7D /* CMBufferProcessorError.swift in Sources */,
+				CC35623A23F8893300DF2C56 /* SFSpeechRecognizer_Extensions.swift in Sources */,
 				CC8D6CEC237E1E7B00565B7D /* AVCaptureVideoOrientation_Extensions.swift in Sources */,
+				CC35623423F8830B00DF2C56 /* AudioController.swift in Sources */,
 				CC037FF5238F09D20017744B /* UIImage_Extensions.swift in Sources */,
+				CC35623823F887DB00DF2C56 /* SFAudioAuthorizationInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

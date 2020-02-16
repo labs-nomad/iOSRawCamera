@@ -25,6 +25,12 @@ public let CameraNeedsAuthorizationNotification = Notification.Name.init("Camera
 /// Notification that gets fired when the Camera Authorization state changes
 public let CameraAuthorizationStateChangedNotification = Notification.Name.init("CameraAuthorizationStateChangedNotification")
 
+//MARK: Audio Authorization Controller Notifications
+/// Notification that gets fired if audio needs authorization from the user
+public let AudioNeedsAuthorizationNotification = Notification.Name.init("AudioNeedsAuthorizationNotification")
+/// Notification that gets fired when the Audio Authorization state changed
+public let AudioAuthorizationStateChangedNotification = Notification.Name.init("AudioAuthorizationStateChangedNotification")
+
 //MARK: CameraInput Notifications
 /// Notification that gets fired when either the system pressure level or state changes on an input device. Posts a `DevicePressureReading` tuple object
 public let DeviceInputPressureChangeNotification = Notification.Name.init("DeviceInputPressureChangeNotification")

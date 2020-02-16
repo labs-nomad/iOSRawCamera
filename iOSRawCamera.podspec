@@ -26,5 +26,5 @@ Pod::Spec.new do |s|
   
     s.swift_version = '5'
 
-    s.frameworks = 'AVFoundation'
+    s.frameworks = 'AVFoundation', 'Speech'
 end
