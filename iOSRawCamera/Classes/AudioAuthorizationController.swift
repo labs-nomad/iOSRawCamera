@@ -53,8 +53,12 @@ public struct AudioAuthorizationController {
         guard authorizer.isAvailable == true else {
             return false
         }
-        guard authorizer.supportsOnDeviceRecognition == true else {
-            return false
+        if #available(iOS 13, *) {
+            guard authorizer.supportsOnDeviceRecognition == true else {
+                return false
+            }
+        } else {
+            // Fallback on earlier versions
         }
         return true
     }

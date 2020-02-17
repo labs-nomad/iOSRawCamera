@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
     s.author           = { 'shared@nomad-go.com' => 'nomad@shared-go.com' }
     s.source           = { :git => 'https://github.com/labs-nomad/iOSRawCamera.git', :tag => s.version.to_s }
     
-    s.ios.deployment_target = '11.1'
+    s.ios.deployment_target = '12.4'
 
     s.source_files = 'iOSRawCamera/**/*.{h,m,swift}'
   
