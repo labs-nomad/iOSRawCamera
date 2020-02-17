@@ -25,6 +25,14 @@ public let CameraNeedsAuthorizationNotification = Notification.Name.init("Camera
 /// Notification that gets fired when the Camera Authorization state changes
 public let CameraAuthorizationStateChangedNotification = Notification.Name.init("CameraAuthorizationStateChangedNotification")
 
+//MARK: Audio Controller Notifications
+/// The state of the audio controller changed
+public let AudioStateChangedNotification = Notification.Name.init("AudioStateChangedNotification")
+/// The on device speech recognition service detected a new set of text that it considers "final"
+public let NewAudioInferenceNotification = Notification.Name.init("NewAudioInference")
+/// The AudioController experienced soem sort of error
+public let AudioControllerErrorNotification = Notification.Name.init("AudioControllerError")
+
 //MARK: Audio Authorization Controller Notifications
 /// Notification that gets fired if audio needs authorization from the user
 public let AudioNeedsAuthorizationNotification = Notification.Name.init("AudioNeedsAuthorizationNotification")

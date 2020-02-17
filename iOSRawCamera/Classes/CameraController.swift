@@ -174,7 +174,7 @@ public class CameraController: NSObject {
             captureSession.sessionPreset = sessionPreset
             
             //Make sure we are starting from a fresh configuration.
-            self.removeAllInpjuts()
+            self.removeAllInputs()
             self.removeAllOutputs()
             
             //Call function that sets up and returns an AVCaptureVideoDataOutput
@@ -217,7 +217,8 @@ public class CameraController: NSObject {
     
     //MARK: Internal Functions
     
-    private func preSetupAuthorizationCheck(authorization: AVCaptureDeviceCameraAuthorizationInterface.Type = AVCaptureDevice.self, authorizationController: CameraAuthorizationController = CameraAuthorizationController()) throws {
+    private func
+        preSetupAuthorizationCheck(authorization: AVCaptureDeviceCameraAuthorizationInterface.Type = AVCaptureDevice.self, authorizationController: CameraAuthorizationController = CameraAuthorizationController()) throws {
         /*
          Use the object that conforms to AVCaptureDeviceAuthorization to check the state of the camera authorization.
          

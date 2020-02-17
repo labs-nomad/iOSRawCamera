@@ -28,6 +28,8 @@
 		CC35623623F8874300DF2C56 /* AudioAuthorizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35623523F8874300DF2C56 /* AudioAuthorizationController.swift */; };
 		CC35623823F887DB00DF2C56 /* SFAudioAuthorizationInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35623723F887DB00DF2C56 /* SFAudioAuthorizationInterface.swift */; };
 		CC35623A23F8893300DF2C56 /* SFSpeechRecognizer_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35623923F8893300DF2C56 /* SFSpeechRecognizer_Extensions.swift */; };
+		CC35623C23FA457900DF2C56 /* AudioState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35623B23FA457900DF2C56 /* AudioState.swift */; };
+		CC35623F23FA48EF00DF2C56 /* AudioControllerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35623E23FA48EF00DF2C56 /* AudioControllerError.swift */; };
 		CC8D6CC9237E180600565B7D /* iOSRawCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8D6CBF237E180600565B7D /* iOSRawCamera.framework */; };
 		CC8D6CD0237E180600565B7D /* iOSRawCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = CC8D6CC2237E180600565B7D /* iOSRawCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CC8D6CDA237E19E400565B7D /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D6CD9237E19E400565B7D /* CameraController.swift */; };
@@ -79,6 +81,8 @@
 		CC35623523F8874300DF2C56 /* AudioAuthorizationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAuthorizationController.swift; sourceTree = "<group>"; };
 		CC35623723F887DB00DF2C56 /* SFAudioAuthorizationInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFAudioAuthorizationInterface.swift; sourceTree = "<group>"; };
 		CC35623923F8893300DF2C56 /* SFSpeechRecognizer_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSpeechRecognizer_Extensions.swift; sourceTree = "<group>"; };
+		CC35623B23FA457900DF2C56 /* AudioState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioState.swift; sourceTree = "<group>"; };
+		CC35623E23FA48EF00DF2C56 /* AudioControllerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioControllerError.swift; sourceTree = "<group>"; };
 		CC8D6CBF237E180600565B7D /* iOSRawCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iOSRawCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC8D6CC2237E180600565B7D /* iOSRawCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOSRawCamera.h; sourceTree = "<group>"; };
 		CC8D6CC3237E180600565B7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -145,6 +149,18 @@
 				CC1237A02383555F00C83BEB /* MockSampleBuffer.swift */,
 			);
 			path = MockObjects;
+			sourceTree = "<group>";
+		};
+		CC35623D23FA48D000DF2C56 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				CC8D6CEF237E1F1000565B7D /* CMBufferProcessorError.swift */,
+				CC8D6CF5237E20A400565B7D /* PixelBufferCopyError.swift */,
+				CC9F52D22387561E0010F03D /* SetFrameRateError.swift */,
+				CC8D6CE2237E1AD100565B7D /* CameraControllerError.swift */,
+				CC35623E23FA48EF00DF2C56 /* AudioControllerError.swift */,
+			);
+			path = Errors;
 			sourceTree = "<group>";
 		};
 		CC8D6CB5237E180600565B7D = {
@@ -218,13 +234,11 @@
 		CC8D6CDF237E1A5B00565B7D /* Enumerations */ = {
 			isa = PBXGroup;
 			children = (
-				CC8D6CE2237E1AD100565B7D /* CameraControllerError.swift */,
+				CC35623D23FA48D000DF2C56 /* Errors */,
 				CC8D6CE0237E1A6900565B7D /* VideoFeedState.swift */,
 				CC8D6CE6237E1D5000565B7D /* CameraRoute.swift */,
-				CC8D6CEF237E1F1000565B7D /* CMBufferProcessorError.swift */,
-				CC8D6CF5237E20A400565B7D /* PixelBufferCopyError.swift */,
-				CC9F52D22387561E0010F03D /* SetFrameRateError.swift */,
 				CC037FF2238F09900017744B /* JPEGQuality.swift */,
+				CC35623B23FA457900DF2C56 /* AudioState.swift */,
 			);
 			path = Enumerations;
 			sourceTree = "<group>";
@@ -363,6 +377,7 @@
 				CC8D6CE1237E1A6900565B7D /* VideoFeedState.swift in Sources */,
 				CC31D8FC23832E7A009B1287 /* AVCaptureDevice_Extensions.swift in Sources */,
 				CC9F52CF23874D030010F03D /* FrameRateManagable.swift in Sources */,
+				CC35623F23FA48EF00DF2C56 /* AudioControllerError.swift in Sources */,
 				CC31D8F923832D3D009B1287 /* AVCaptureDeviceCameraAuthorizationInterface.swift in Sources */,
 				CC8D6CF4237E207100565B7D /* CVPixelBuffer_Extensions.swift in Sources */,
 				CC037FFB238F0C010017744B /* InterruptionReason_Extension.swift in Sources */,
@@ -371,6 +386,7 @@
 				CC8D6CF6237E20A400565B7D /* PixelBufferCopyError.swift in Sources */,
 				CC9F52D32387561E0010F03D /* SetFrameRateError.swift in Sources */,
 				CC8D6CE9237E1DE800565B7D /* CameraAuthorizationController.swift in Sources */,
+				CC35623C23FA457900DF2C56 /* AudioState.swift in Sources */,
 				CC1237AA238377D400C83BEB /* AVCaptureDeviceArray_Extensions.swift in Sources */,
 				CC8D6CEE237E1ECF00565B7D /* CMSampleBuffer_Extensions.swift in Sources */,
 				CC8D6CDA237E19E400565B7D /* CameraController.swift in Sources */,
