@@ -50,12 +50,9 @@ public class AudioController: NSObject {
         // Cancel the previous task if it's running.
         recognitionTask?.cancel()
         self.recognitionTask = nil
-        
-        self.recognitionTask = self.speechRecognizer.recognitionTask(with: recognitionRequest, delegate: self)
-        
+        self.recognitionTask = self.speechRecognizer.recognitionTask(with: self.recognitionRequest, delegate: self)
         self.audioEngine.prepare()
         try audioEngine.start()
-            
         self.audioState = .running
     }
     
