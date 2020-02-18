@@ -11,17 +11,24 @@ public class AudioController: NSObject {
     
     //MARK: Public Properties
     /// The `AudioState` helps guide you through the process of gettign the audio -> Speech inference engine up and reporting things.
-    var audioState: AudioState = AudioState.notPrepared(nil) {
+    public var audioState: AudioState = AudioState.notPrepared(nil) {
         didSet {
             OperationQueue.main.addOperation {
                 self.notificationCenter.post(name: AudioStateChangedNotification, object: self.audioState)
+                if case AudioState.notPrepared(let error) = self.audioState {
+                    self.notificationCenter.post(name: AudioControllerErrorNotification, object: error)
+                }
             }
         }
     }
     
     /// Is the audio session running
-    public var isAudioRunning: Bool {
-        return self.audioEngine.isRunning
+    public var isSpeechRecognitionRunning: Bool {
+        if self.audioEngine.isRunning == true && self.recognitionTask?.state == .running {
+            return true
+        }else {
+            return false
+        }
     }
     
     //MARK: Private Properties
@@ -75,6 +82,12 @@ public class AudioController: NSObject {
             break
         }
     }
+    
+    public func tearDown() {
+        self.audioEngine.inputNode.removeTap(onBus: 0)
+    }
+    
+    
     public func setUp(authorization: SFAudioAuthorizationInterface.Type = SFSpeechRecognizer.self, authorizationConroller: AudioAuthorizationController = AudioAuthorizationController()) throws {
         
         //We want to intercept the error to set the state of the controller. DEF throw that error though.
@@ -97,7 +110,11 @@ public class AudioController: NSObject {
             
             // Keep speech recognition data on device
             if #available(iOS 13, *) {
-                recognitionRequest.requiresOnDeviceRecognition = true
+//                guard self.speechRecognizer.supportsOnDeviceRecognition == true else {
+//                    throw AudioControllerError.onDeviceRecognitionNotSupported
+//                    return
+//                }
+                self.recognitionRequest.requiresOnDeviceRecognition = true
             }
             
             // Configure the microphone input.
@@ -141,22 +158,23 @@ public class AudioController: NSObject {
 
 extension AudioController: SFSpeechRecognitionTaskDelegate {
     public func speechRecognitionDidDetectSpeech(_ task: SFSpeechRecognitionTask) {
-        
+        //print("Detected Speech")
     }
     public func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didHypothesizeTranscription transcription: SFTranscription) {
-        
+        //print("Did hypothesize: \(transcription)")
     }
     public func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishRecognition recognitionResult: SFSpeechRecognitionResult) {
-        print(recognitionResult.bestTranscription)
+        let newConversation = recognitionResult.bestTranscription.formattedString
+        self.notificationCenter.post(name: NewAudioInferenceNotification, object: newConversation)
     }
     public func speechRecognitionTaskFinishedReadingAudio(_ task: SFSpeechRecognitionTask) {
-        
+        //print("Speech task Did finish reading audio")
     }
     public func speechRecognitionTaskWasCancelled(_ task: SFSpeechRecognitionTask) {
-        
+        //print("Speech Task was cancelled")
     }
     public func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishSuccessfully successfully: Bool) {
-    
+        //print("Speech task did finish \(successfully)")
     }
 }
 
@@ -167,7 +185,6 @@ extension AudioController: SFSpeechRecognizerDelegate {
         }
         let error = AudioControllerError.becameUnavailable
         self.audioState = AudioState.notPrepared(error)
-        self.notificationCenter.post(name: AudioControllerErrorNotification, object: error)
     }
 }
 

@@ -25,6 +25,12 @@ public let CameraNeedsAuthorizationNotification = Notification.Name.init("Camera
 /// Notification that gets fired when the Camera Authorization state changes
 public let CameraAuthorizationStateChangedNotification = Notification.Name.init("CameraAuthorizationStateChangedNotification")
 
+//MARK: CameraInput Notifications
+/// Notification that gets fired when either the system pressure level or state changes on an input device. Posts a `DevicePressureReading` tuple object
+public let DeviceInputPressureChangeNotification = Notification.Name.init("DeviceInputPressureChangeNotification")
+/// Notification that gets fired when the frame rate for an `AVCaptureDevice` you are observing changes. `DeviceFrameRateChange`
+public let DeviceFrameRateChangedNotification = Notification.Name.init("DeviceFrameRateChangedNotification")
+
 //MARK: Audio Controller Notifications
 /// The state of the audio controller changed
 public let AudioStateChangedNotification = Notification.Name.init("AudioStateChangedNotification")
@@ -38,9 +44,3 @@ public let AudioControllerErrorNotification = Notification.Name.init("AudioContr
 public let AudioNeedsAuthorizationNotification = Notification.Name.init("AudioNeedsAuthorizationNotification")
 /// Notification that gets fired when the Audio Authorization state changed
 public let AudioAuthorizationStateChangedNotification = Notification.Name.init("AudioAuthorizationStateChangedNotification")
-
-//MARK: CameraInput Notifications
-/// Notification that gets fired when either the system pressure level or state changes on an input device. Posts a `DevicePressureReading` tuple object
-public let DeviceInputPressureChangeNotification = Notification.Name.init("DeviceInputPressureChangeNotification")
-/// Notification that gets fired when the frame rate for an `AVCaptureDevice` you are observing changes. `DeviceFrameRateChange`
-public let DeviceFrameRateChangedNotification = Notification.Name.init("DeviceFrameRateChangedNotification")

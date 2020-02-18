@@ -14,4 +14,5 @@ public enum AudioControllerError: Error, Equatable {
     case permissionNotDetermined
     case badPermissions
     case becameUnavailable
+    case onDeviceRecognitionNotSupported
 }
