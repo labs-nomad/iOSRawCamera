@@ -6,6 +6,8 @@
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
 
+import Foundation
+
 //MARK: Camera Controller notifications
 
 /// Notification that gets fired from the VideoFeedAndInferenceController when the state of the video feed changes. The `VideoFeedState` gets passed through on the `.object` property of this notification.

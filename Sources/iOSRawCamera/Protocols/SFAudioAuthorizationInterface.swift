@@ -5,6 +5,9 @@
 //  Created by Nomad Company on 2/15/20.
 //  Copyright © 2020 Nomad Company. All rights reserved.
 //
+
+import Speech
+
 /**
  We need an interface declaration so that we could write test eventually.
  

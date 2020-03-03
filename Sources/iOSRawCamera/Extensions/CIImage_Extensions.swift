@@ -5,6 +5,7 @@
 //  Created by Nomad Company on 11/27/19.
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
+import UIKit
 
 public extension CIImage {
     /// For convenience, we simply return a UIImage with the constructor that takes a CIImage.

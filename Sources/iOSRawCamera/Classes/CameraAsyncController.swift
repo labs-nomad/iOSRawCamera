@@ -6,7 +6,7 @@
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
 
-import Foundation
+import AVFoundation
 
 
 /// This controller helps you do ASYNC processes with the `CameraController` according to Apples best practice documentation. This controller is de-coupled from the `CameraController` because there are no assumptions  made on how you want to manage yoru background threads. This controller is available for convenience.

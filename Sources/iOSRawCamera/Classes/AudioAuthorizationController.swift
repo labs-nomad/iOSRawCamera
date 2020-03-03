@@ -5,7 +5,8 @@
 //  Created by Nomad Company on 2/15/20.
 //  Copyright © 2020 Nomad Company. All rights reserved.
 //
-
+import Speech
+import Foundation
 
 /// Struct that facilitates the management and exploration of Text To Speech Authorization status.
 public struct AudioAuthorizationController {

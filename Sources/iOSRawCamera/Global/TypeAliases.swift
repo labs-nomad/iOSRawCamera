@@ -6,7 +6,7 @@
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
 
-import Foundation
+import AVFoundation
 
 
 ///Represents a range of frame rates

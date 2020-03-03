@@ -5,6 +5,8 @@
 //  Created by Nomad Company on 2/15/20.
 //  Copyright © 2020 Nomad Company. All rights reserved.
 //
+import AVFoundation
+import Speech
 
 
 public class AudioController: NSObject {

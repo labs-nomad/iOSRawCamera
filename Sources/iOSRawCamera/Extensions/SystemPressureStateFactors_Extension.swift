@@ -6,6 +6,8 @@
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
 
+import AVFoundation
+
 public extension AVCaptureDevice.SystemPressureState.Factors {
     /// Returns the human readable string that describes the system pressure factors.
     func toString() -> String {

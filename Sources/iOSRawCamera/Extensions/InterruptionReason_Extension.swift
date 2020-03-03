@@ -6,6 +6,10 @@
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
 
+
+import AVFoundation
+
+
 public extension AVCaptureSession.InterruptionReason {
     /// Returns the Apple documentation string for the reason.
     func toString() -> String {

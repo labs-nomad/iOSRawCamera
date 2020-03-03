@@ -6,6 +6,8 @@
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
 
+import AVFoundation
+
 public extension AVCaptureDevice.SystemPressureState.Level {
     /// Returns the human readabel string for the level of system pressure.
     func toString() -> String {

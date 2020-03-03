@@ -5,6 +5,7 @@
 //  Created by Nomad Company on 11/18/19.
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
+import AVFoundation
 
 /*
  According to the Apple documentation around the discovery session the order of the array is preserved according to the requested device types. This means that you can ask for the best / latest camera first and expect that to be listed before the least performing camera.

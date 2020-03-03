@@ -6,7 +6,7 @@
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
 
-import Foundation
+import AVFoundation
 /**
  This extension forces conformance of the `AVCaptureDevice` to the `AVCaptureDeviceCameraAuthorizationInterface` so that we can provide objects with testable implementations
  

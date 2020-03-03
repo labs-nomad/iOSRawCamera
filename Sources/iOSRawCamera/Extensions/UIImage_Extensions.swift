@@ -6,6 +6,8 @@
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
 
+import UIKit
+
 extension UIImage {
     /// Returns the data for the specified image in JPEG format.
     /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.

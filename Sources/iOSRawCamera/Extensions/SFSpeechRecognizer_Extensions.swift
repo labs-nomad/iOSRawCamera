@@ -6,6 +6,8 @@
 //  Copyright © 2020 Nomad Company. All rights reserved.
 //
 
+import Speech
+
 extension SFSpeechRecognizer: SFAudioAuthorizationInterface {
     
 }

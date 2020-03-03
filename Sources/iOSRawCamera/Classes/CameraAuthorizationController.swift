@@ -5,6 +5,7 @@
 //  Created by Nomad Company on 11/14/19.
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
+import AVFoundation
 
 /// This is a struct that you can use to determine the authorization status of the camera.
 public struct CameraAuthorizationController {

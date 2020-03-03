@@ -5,6 +5,8 @@
 //  Created by Nomad Company on 11/14/19.
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
+import AVFoundation
+import UIKit
 
 public extension CVPixelBuffer {
     /// Computed Property to return a `UIImage` from a `CVPixelBuffer`. Makes a `CIImage` from the `CVPixelBuffer` then makes and returns a `UIImage` from a `CIImage`.
