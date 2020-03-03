@@ -22,7 +22,8 @@ Pod::Spec.new do |s|
     
     s.ios.deployment_target = '12.4'
 
-    s.source_files = 'iOSRawCamera/**/*.{h,m,swift}'
+    s.source_files = 'iOSRawCamera/**/*.{h,m}'
+    s.source_files = 'Sources/iOSRawCamera/**/*.swift'
   
     s.swift_version = '5'
 
