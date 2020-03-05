@@ -38,7 +38,11 @@ public class CameraController: NSObject {
     }
     
     /// Get the current camera route
-    public internal(set) var currentCameraPosition: iOSRawCameraRoute = iOSRawCameraRoute.front
+    public internal(set) var currentCameraPosition: iOSRawCameraRoute = iOSRawCameraRoute.front {
+        didSet {
+            self.notificationCenter.post(name: CameraRouteChangedNotification, object: self.currentCameraPosition)
+        }
+    }
     
     /// The camera position opposite the `.currentCameraPosition`
     public var oppositeCameraPosition: iOSRawCameraRoute {

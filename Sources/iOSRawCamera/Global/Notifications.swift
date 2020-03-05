@@ -18,6 +18,8 @@ public let NewCameraBufferNotification = Notification.Name.init("NewCameraBuffer
 public let CameraControllerErrorNotification = Notification.Name.init("CameraControllerErrorNotification")
 /// Notification that gets fired when the `AVCaptureDeviceInput` changes. Either during setup or when the inputs changes
 public let DeviceInputChangedNotification = Notification.Name.init("DeviceInputChangedNotification")
+/// Notification that gets fired when the iOSRawRoute changes.
+public let CameraRouteChangedNotification = Notification.Name.init("CameraRouteChangedNotification")
 
 
 //MARK: Camera Authorization Controller Notifications
