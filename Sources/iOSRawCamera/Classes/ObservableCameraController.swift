@@ -133,8 +133,8 @@ public class ObservableCameraController: ObservableObject {
         guard let _ = notification.object as? VideoFeedState else {
             return
         }
-        self.currentVideoFrame = nil
-        self.currentPixelBuffer = nil
+        
+        self.resetBufferState()
     }
     
     func videoRouteChanged(_ notification: Notification) {
@@ -288,6 +288,13 @@ public class ObservableCameraController: ObservableObject {
     private func change(videoState: VideoFeedState) {
         DispatchQueue.main.async {
             self.videoState = videoState
+        }
+    }
+    
+    private func resetBufferState() {
+        DispatchQueue.main.async {
+            self.currentVideoFrame = nil
+            self.currentPixelBuffer = nil
         }
     }
         
