@@ -141,8 +141,7 @@ public class ObservableCameraController: ObservableObject {
         guard let _ = notification.object as? iOSRawCameraRoute else {
             return
         }
-        self.currentVideoFrame = nil
-        self.currentPixelBuffer = nil
+        self.resetBufferState()
     }
     
     func newBuffer(_ notification: Notification) {
