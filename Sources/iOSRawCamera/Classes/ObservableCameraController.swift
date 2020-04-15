@@ -117,7 +117,7 @@ public class ObservableCameraController: ObservableObject {
         do {
             try self.updateCaptureConnections(forOrientation: device.orientation)
         }catch{
-            self.videoState = VideoFeedState.notPrepared(error)
+            self.change(videoState: VideoFeedState.notPrepared(error))
         }
     }
     
@@ -171,13 +171,13 @@ public class ObservableCameraController: ObservableObject {
     /// Abstraction over the `AVCaptureSession` to make it start collecting video frames.
     public func startRunning() {
         self.captureSession.startRunning()
-        self.videoState = .running
+        self.change(videoState: .running)
     }
     
     /// Abstraction over the `AVCaptureSession` to make it stop collecting video frames.
     public func stopRunning() {
         self.captureSession.stopRunning()
-        self.videoState = .prepared
+        self.change(videoState: .prepared)
     }
     
     /// Convenience function that will switch the session from running to prepared or vice versa.
@@ -237,7 +237,7 @@ public class ObservableCameraController: ObservableObject {
             try self.preSetupAuthorizationCheck(authorization: authorization, authorizationController: authorizationController)
 
             //Change the state object to 'preparing'
-            self.videoState = VideoFeedState.preparing
+            self.change(videoState: .preparing)
             
             //Call this so that we can be atomic about the updates.
             self.captureSession.beginConfiguration()
@@ -265,10 +265,10 @@ public class ObservableCameraController: ObservableObject {
             try self.updateCaptureConnections(forOrientation: self.currentDeviceOrientation)
             self.captureSession.commitConfiguration()
             // Call the completion for setting up the camera
-            self.videoState = VideoFeedState.prepared
+            self.change(videoState: VideoFeedState.prepared)
         } catch {
             //Call the completion with the error object
-            self.videoState = VideoFeedState.notPrepared(error)
+            self.change(videoState: VideoFeedState.notPrepared(error))
             throw error
         }
     }
@@ -279,11 +279,19 @@ public class ObservableCameraController: ObservableObject {
         self.captureSession.stopRunning()
         self.removeAllOutputs()
         self.removeAllInputs()
-        self.videoState = .notPrepared(nil)
+        self.change(videoState: .notPrepared(nil))
     }
     
     
     //MARK: Internal Functions
+    
+    private func change(videoState: VideoFeedState) {
+        DispatchQueue.main.async {
+            self.videoState = videoState
+        }
+    }
+        
+    
      private func
          preSetupAuthorizationCheck(authorization: AVCaptureDeviceCameraAuthorizationInterface.Type = AVCaptureDevice.self, authorizationController: CameraAuthorizationController = CameraAuthorizationController()) throws {
          /*
