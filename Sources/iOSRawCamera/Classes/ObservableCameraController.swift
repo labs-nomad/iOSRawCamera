@@ -156,6 +156,7 @@ public class ObservableCameraController: ObservableObject {
         
         DispatchQueue.main.async {
             self.currentVideoFrame = image
+            self.notificationCenter.post(NewDisplayImageNotification)
             self.currentPixelBuffer = buffer
         }
     }

@@ -14,6 +14,8 @@ import Foundation
 public let VideoFeedStateChangedNotification = Notification.Name.init("VideoFeedStateChangedNotification")
 /// Notification that gets fired when the Video output has a new froma
 public let NewCameraBufferNotification = Notification.Name.init("NewCameraBufferNotification")
+/// Notification that gets fired when the video output has a new UIImage
+public let NewDisplayImageNotification = Notification.Name.init("NewDisplayImageNotification")
 /// Notification that gets fired if an error occures from the `CameraController`
 public let CameraControllerErrorNotification = Notification.Name.init("CameraControllerErrorNotification")
 /// Notification that gets fired when the `AVCaptureDeviceInput` changes. Either during setup or when the inputs changes
