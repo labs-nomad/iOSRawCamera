@@ -16,4 +16,21 @@ extension UIImage {
         let compressed = self.jpegData(compressionQuality: quality.rawValue)
         return compressed
     }
+    
+    
+    /// Function that lets you retrieve a UIImage for display in SwiftUI
+    /// - Parameter context: The context to render the Image
+    /// - Returns: A UIImage with the data loaded.
+    
+    public func load(withContext context: CIContext) -> UIImage {
+        guard let ciImage = self.ciImage else {
+            return self
+        }
+        
+        guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
+            return self
+        }
+        let loadedImage = UIImage(cgImage: cgImage)
+        return loadedImage
+    }
 }
