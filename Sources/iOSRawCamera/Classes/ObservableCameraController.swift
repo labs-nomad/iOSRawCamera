@@ -221,33 +221,33 @@ public class ObservableCameraController: ObservableObject {
         self.captureSession.commitConfiguration()
         self.currentCameraPosition = self.oppositeCameraPosition
     }
-    
-    // returns the current screen resolution (differs by device type)
-    open func getCaptureResolution() -> CGSize {
-        // Define default resolution
-        var resolution = CGSize(width: 0, height: 0)
-        
-        // Get video dimensions
-        if (cameraDevice == nil){
-            log.warning("Camera not allocated")
-            selectedCamera = getCamera()
-        }
-        
-        if let formatDescription = CameraManager.cameraDevice?.activeFormat.formatDescription {
-            let dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription)
-            resolution = CGSize(width: CGFloat(dimensions.width), height: CGFloat(dimensions.height))
-        } else {
-            log.warning("formatDescription error. Setting resolution to screen default")
-            resolution = CGSize(width: CGFloat(UIScreen.main.bounds.width), height: CGFloat(UIScreen.main.bounds.height))
-        }
-        
-        if (self.currentDeviceOrientation == .portrait) {
-            resolution = CGSize(width: resolution.height, height: resolution.width)
-        }
-        
-        // Return resolution
-        return resolution
-    }
+//    
+//    // returns the current screen resolution (differs by device type)
+//    open func getCaptureResolution() -> CGSize {
+//        // Define default resolution
+//        var resolution = CGSize(width: 0, height: 0)
+//        
+//        // Get video dimensions
+//        if (cameraDevice == nil){
+//            log.warning("Camera not allocated")
+//            selectedCamera = getCamera()
+//        }
+//        
+//        if let formatDescription = CameraManager.cameraDevice?.activeFormat.formatDescription {
+//            let dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription)
+//            resolution = CGSize(width: CGFloat(dimensions.width), height: CGFloat(dimensions.height))
+//        } else {
+//            log.warning("formatDescription error. Setting resolution to screen default")
+//            resolution = CGSize(width: CGFloat(UIScreen.main.bounds.width), height: CGFloat(UIScreen.main.bounds.height))
+//        }
+//        
+//        if (self.currentDeviceOrientation == .portrait) {
+//            resolution = CGSize(width: resolution.height, height: resolution.width)
+//        }
+//        
+//        // Return resolution
+//        return resolution
+//    }
     
     
     
