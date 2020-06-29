@@ -23,14 +23,6 @@ public let DeviceInputChangedNotification = Notification.Name.init("DeviceInputC
 /// Notification that gets fired when the iOSRawRoute changes.
 public let CameraRouteChangedNotification = Notification.Name.init("CameraRouteChangedNotification")
 
-
-//MARK: Camera Authorization Controller Notifications
-
-/// Notification that gets fired is the camera needs Authorization from the user
-public let CameraNeedsAuthorizationNotification = Notification.Name.init("CameraNeedsAuthorizationNotification")
-/// Notification that gets fired when the Camera Authorization state changes
-public let CameraAuthorizationStateChangedNotification = Notification.Name.init("CameraAuthorizationStateChangedNotification")
-
 //MARK: CameraInput Notifications
 /// Notification that gets fired when either the system pressure level or state changes on an input device. Posts a `DevicePressureReading` tuple object
 public let DeviceInputPressureChangeNotification = Notification.Name.init("DeviceInputPressureChangeNotification")

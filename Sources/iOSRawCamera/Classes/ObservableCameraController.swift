@@ -11,8 +11,6 @@ import UIKit
 
 public class ObservableCameraController: ObservableObject {
     //MARK: @Published properties
-    @Published public private(set) var cameraAuthorizationStatus: AVAuthorizationStatus = CameraAuthorizationController().authorizationStatus()
-    
     @Published public private(set) var videoState: VideoFeedState = VideoFeedState.notPrepared(nil)
     
     @Published public var videoRoute: iOSRawCameraRoute = iOSRawCameraRoute.front
@@ -99,7 +97,6 @@ public class ObservableCameraController: ObservableObject {
         self.currentDeviceOrientation = UIDevice.current.orientation
         self.notificationCenter = NotificationCenter.default
         self.deviceOrientationSubscription = self.notificationCenter.publisher(for: UIDevice.orientationDidChangeNotification).sink { self.orientationChanged($0) }
-        self.authorizationSubscription = self.notificationCenter.publisher(for: CameraAuthorizationStateChangedNotification).sink { self.authorizationChange($0) }
         self.videoFeedStateChangedSubscription = self.notificationCenter.publisher(for: VideoFeedStateChangedNotification).sink { self.videoFeedStateChanged($0) }
         self.videoRouteChangedSubscription = self.notificationCenter.publisher(for: CameraRouteChangedNotification).sink { self.videoRouteChanged($0) }
         self.newBufferSubscription = self.notificationCenter.publisher(for: NewCameraBufferNotification).sink { self.newBuffer($0) }
@@ -119,14 +116,6 @@ public class ObservableCameraController: ObservableObject {
         }catch{
             self.change(videoState: VideoFeedState.notPrepared(error))
         }
-    }
-    
-    func authorizationChange(_ notification: Notification) {
-        guard let state = notification.object as? AVAuthorizationStatus else {
-            return
-        }
-        
-        self.cameraAuthorizationStatus = state
     }
     
     func videoFeedStateChanged(_ notification: Notification) {
@@ -221,33 +210,6 @@ public class ObservableCameraController: ObservableObject {
         self.captureSession.commitConfiguration()
         self.currentCameraPosition = self.oppositeCameraPosition
     }
-//    
-//    // returns the current screen resolution (differs by device type)
-//    open func getCaptureResolution() -> CGSize {
-//        // Define default resolution
-//        var resolution = CGSize(width: 0, height: 0)
-//        
-//        // Get video dimensions
-//        if (cameraDevice == nil){
-//            log.warning("Camera not allocated")
-//            selectedCamera = getCamera()
-//        }
-//        
-//        if let formatDescription = CameraManager.cameraDevice?.activeFormat.formatDescription {
-//            let dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription)
-//            resolution = CGSize(width: CGFloat(dimensions.width), height: CGFloat(dimensions.height))
-//        } else {
-//            log.warning("formatDescription error. Setting resolution to screen default")
-//            resolution = CGSize(width: CGFloat(UIScreen.main.bounds.width), height: CGFloat(UIScreen.main.bounds.height))
-//        }
-//        
-//        if (self.currentDeviceOrientation == .portrait) {
-//            resolution = CGSize(width: resolution.height, height: resolution.width)
-//        }
-//        
-//        // Return resolution
-//        return resolution
-//    }
     
     
     
