@@ -9,7 +9,7 @@ import Combine
 import AVFoundation
 
 /// Class that will serve as the receiver for
-class iOSRawCameraReceiver {
+public class iOSRawCameraReceiver {
     
     let cameraAuthorizationController = CameraAuthorizationController.init()
     
@@ -17,7 +17,7 @@ class iOSRawCameraReceiver {
     
     var subscriptions: Set<AnyCancellable> = []
     
-    init() {
+    public init() {
         self.startSubscriptions()
     }
     
@@ -49,7 +49,7 @@ extension iOSRawCameraReceiver {
             switch result {
             case .failure(let error):
                 iOSRawCameraPublishers.cameraAuthorizationError.send(error)
-            case .success(let success):
+            case .success(_):
                 iOSRawCameraPublishers.cameraAuthorization.send(self.cameraAuthorizationController.authorizationStatus())
             }
         }
