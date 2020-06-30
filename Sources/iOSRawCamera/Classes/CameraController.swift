@@ -158,6 +158,10 @@ public class CameraController: NSObject {
         self.currentCameraPosition = self.oppositeCameraPosition
     }
     
+    public func vendPreviewLayer() -> AVCaptureVideoPreviewLayer {
+        let layer = AVCaptureVideoPreviewLayer.init(session: self.captureSession)
+        return layer
+    }
     
     
     
