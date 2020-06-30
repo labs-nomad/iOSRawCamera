@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name = 'iOSRawCamera'
-    s.version = '1.0.26'
+    s.version = '1.0.29'
     s.summary = 'Get the raw camera feed for Computer Vision Tasks'
     s.description = <<-DESC 
     This pod lets you access the CVPixelBuffer object in accordance with Apples Documentation.
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
     s.author           = { 'shared@nomad-go.com' => 'nomad@shared-go.com' }
     s.source           = { :git => 'https://github.com/labs-nomad/iOSRawCamera.git', :tag => s.version.to_s }
     
-    s.ios.deployment_target = '12.4'
+    s.ios.deployment_target = '13.0'
 
     s.source_files = 'iOSRawCamera/**/*.{h,m}'
     s.source_files = 'Sources/iOSRawCamera/**/*.swift'

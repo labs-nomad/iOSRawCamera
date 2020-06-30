@@ -11,8 +11,6 @@ import UIKit
 
 public class ObservableCameraController: ObservableObject {
     //MARK: @Published properties
-    @Published public private(set) var cameraAuthorizationStatus: AVAuthorizationStatus = CameraAuthorizationController().authorizationStatus()
-    
     @Published public private(set) var videoState: VideoFeedState = VideoFeedState.notPrepared(nil)
     
     @Published public var videoRoute: iOSRawCameraRoute = iOSRawCameraRoute.front
@@ -99,7 +97,6 @@ public class ObservableCameraController: ObservableObject {
         self.currentDeviceOrientation = UIDevice.current.orientation
         self.notificationCenter = NotificationCenter.default
         self.deviceOrientationSubscription = self.notificationCenter.publisher(for: UIDevice.orientationDidChangeNotification).sink { self.orientationChanged($0) }
-        self.authorizationSubscription = self.notificationCenter.publisher(for: CameraAuthorizationStateChangedNotification).sink { self.authorizationChange($0) }
         self.videoFeedStateChangedSubscription = self.notificationCenter.publisher(for: VideoFeedStateChangedNotification).sink { self.videoFeedStateChanged($0) }
         self.videoRouteChangedSubscription = self.notificationCenter.publisher(for: CameraRouteChangedNotification).sink { self.videoRouteChanged($0) }
         self.newBufferSubscription = self.notificationCenter.publisher(for: NewCameraBufferNotification).sink { self.newBuffer($0) }
@@ -119,14 +116,6 @@ public class ObservableCameraController: ObservableObject {
         }catch{
             self.change(videoState: VideoFeedState.notPrepared(error))
         }
-    }
-    
-    func authorizationChange(_ notification: Notification) {
-        guard let state = notification.object as? AVAuthorizationStatus else {
-            return
-        }
-        
-        self.cameraAuthorizationStatus = state
     }
     
     func videoFeedStateChanged(_ notification: Notification) {
@@ -156,7 +145,7 @@ public class ObservableCameraController: ObservableObject {
         
         DispatchQueue.main.async {
             self.currentVideoFrame = image
-            self.notificationCenter.post(NewDisplayImageNotification)
+            self.notificationCenter.post(name: NewDisplayImageNotification, object: self.currentVideoFrame)
             self.currentPixelBuffer = buffer
         }
     }
@@ -227,6 +216,13 @@ public class ObservableCameraController: ObservableObject {
         let layer  = AVCaptureVideoPreviewLayer.init(session: self.captureSession)
         return layer
     }
+    
+    
+    public func vendPreviewLayer() -> AVCaptureVideoPreviewLayer {
+        let layer = AVCaptureVideoPreviewLayer.init(session: self.captureSession)
+        return layer
+    }
+    
     
     
     

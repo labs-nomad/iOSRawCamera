@@ -24,6 +24,18 @@ public extension CVPixelBuffer {
     }
     
     
+    /// Loads a UIImage up for display on SwiftUI
+    /// - Parameter context: The context to help the loading
+    /// - Returns: A UIImage ready for display.
+    func load(withContext context: CIContext) -> UIImage? {
+        let ciImage = self.ciImage
+        guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
+            return nil
+        }
+        let uiImage = UIImage(cgImage: cgImage)
+        return uiImage
+    }
+    
     /**
      The `.isValid` function checks these three things:
      
