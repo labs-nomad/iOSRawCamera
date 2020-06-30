@@ -223,6 +223,11 @@ public class ObservableCameraController: ObservableObject {
     }
     
     
+    public func vendPreviewLayer() -> AVCaptureVideoPreviewLayer {
+        let layer  = AVCaptureVideoPreviewLayer.init(session: self.captureSession)
+        return layer
+    }
+    
     
     
     /// After initalization this object needs to go configure the `AVCaptureSession`. This function checks authorization, initalizes the `AVCaptureSession`, discovers available devices, sets them according to the desired comera position, orients the flow of data according to the UIDeviceOrientation, and sets the video feed state to `.prepared`
