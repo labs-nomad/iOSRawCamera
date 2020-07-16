@@ -27,17 +27,13 @@ extension AVCaptureDevice: AVCaptureDeviceCameraAuthorizationInterface {
 
 extension AVCaptureDevice: FrameRateManagable {
     public func setFrameRate(rate: Int32) throws {
-        do {
-            let newTime = CMTimeMake(value: 1, timescale: rate)
-            let asFloat = CMTimeGetSeconds(newTime)
-            try self.validate(desiredFrameRate: asFloat)
-            try self.lockForConfiguration()
-            self.activeVideoMaxFrameDuration = newTime
-            self.activeVideoMinFrameDuration = newTime
-            self.unlockForConfiguration()
-        }catch{
-            throw error
-        }
+        let newTime = CMTimeMake(value: 1, timescale: rate)
+        let asFloat = CMTimeGetSeconds(newTime)
+        try self.validate(desiredFrameRate: asFloat)
+        try self.lockForConfiguration()
+        self.activeVideoMaxFrameDuration = newTime
+        self.activeVideoMinFrameDuration = newTime
+        self.unlockForConfiguration()
     }
     
     public func currentFrameRate() -> FrameRateRange {

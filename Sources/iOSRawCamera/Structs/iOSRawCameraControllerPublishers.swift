@@ -13,7 +13,7 @@ public struct iOSRawCameraControllerPublishers {
     /// The Combine publisher that will send changes to the `VideoFeedState`
     public static let videoFeedState: CurrentValueSubject<VideoFeedState, Never> = CurrentValueSubject<VideoFeedState, Never>(VideoFeedState.notPrepared(nil))
     /// The definition of the Combine publisher that will provide CVPixelBuffers
-    public static let newPixelBuffer: PassthroughSubject<CVPixelBuffer, Never> = PassthroughSubject<CVPixelBuffer, Never>()
+    public static let newPixelBuffer: CurrentValueSubject<CVPixelBuffer?, Never> = CurrentValueSubject<CVPixelBuffer?, Never>(nil)
     /// The Combine publisher that will send updates when the `AVCaptureDeviceInput` changes
     public static let deviceInputChanged: PassthroughSubject<AVCaptureDeviceInput?, Never> = PassthroughSubject<AVCaptureDeviceInput?, Never>()
     /// The Combine publisher that will send an update when the `AVCaptureDevice` changes
