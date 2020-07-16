@@ -6,17 +6,16 @@
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
 import AVFoundation
+import Combine
 import UIKit
 
-/// Class that combines the video feed from AVFoundation and the inference using the vertigo c library.
+/// Class that encapsulates the AVFoundation set up and manipulation of video inputs.
 public class CameraController: NSObject {
     //MARK: Public properties
     /// The `VideoFeedState`. Will change as the camera is prepared or errors out. When changed internally it fires off a VideoFeedStateChangedNotification for UI to do stuff with.
     public private(set) var videoState = VideoFeedState.notPrepared(nil) {
         didSet {
-            DispatchQueue.main.async {
-                self.notificationCenter.post(name: VideoFeedStateChangedNotification, object: self.videoState)
-            }
+            iOSRawCameraControllerPublishers.videoFeedState.send(self.videoState)
         }
     }
     
@@ -37,16 +36,9 @@ public class CameraController: NSObject {
         return self.captureSession.isInterrupted
     }
     
-    /// Get the current camera route
-    public internal(set) var currentCameraPosition: iOSRawCameraRoute = iOSRawCameraRoute.front {
-        didSet {
-            self.notificationCenter.post(name: CameraRouteChangedNotification, object: self.currentCameraPosition)
-        }
-    }
-    
     /// The camera position opposite the `.currentCameraPosition`
     public var oppositeCameraPosition: iOSRawCameraRoute {
-        switch self.currentCameraPosition {
+        switch iOSRawCameraControllerPublishers.cameraRoute.value {
         case .back:
             return iOSRawCameraRoute.front
         case .front:
@@ -57,7 +49,13 @@ public class CameraController: NSObject {
     /// The current `AVCaptureDeviceInput` that is feeding the camera. If this changes internally, ususlly by the user switching cameras, it will fire a `DeviceInputChangedNotification` notification
     public private(set) var currentCameraInput: AVCaptureDeviceInput? {
         didSet {
-            self.notificationCenter.post(name: DeviceInputChangedNotification, object: self.currentCameraInput)
+            iOSRawCameraControllerPublishers.deviceInputChanged.send(self.currentCameraInput)
+        }
+    }
+    
+    public private(set) var currentCameraDevice: AVCaptureDevice? {
+        didSet {
+            
         }
     }
     
@@ -77,30 +75,31 @@ public class CameraController: NSObject {
     
     var currentDeviceOrientation: UIDeviceOrientation = .unknown
     
-    weak var notificationCenter: NotificationCenter!
+    var subscriptions: Set<AnyCancellable> = []
     //MARK: Init
     public override init() {
         super.init()
         self.currentDeviceOrientation = UIDevice.current.orientation
-        self.notificationCenter = NotificationCenter.default
-        self.notificationCenter.addObserver(self, selector: #selector(self.deviceRotated(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)
-    }
-    
-    //MARK: Notifications
-    @objc func deviceRotated(_ sender: Notification) {
-        guard let device = sender.object as? UIDevice else {
-            return
+        
+        
+        let deviceOrientationSubscription = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification).sink { self.deviceRotated($0) }
+        
+        let changeCameraRouteSubscription = iOSRawCameraControllerPublishers.changeCameraRoute.sink { (action) in
+            switch action {
+            case .swap:
+                let cameraAsyncController: CameraAsyncController = CameraAsyncController.init()
+                cameraAsyncController.swapCamerasAsync(cameraController: self, callback: { (p_error) in
+                    guard let error = p_error else {
+                        return
+                    }
+                    iOSRawCameraControllerPublishers.cameraControllerError.send(error)
+                }, returnQueue: DispatchQueue.main)
+            }
         }
         
-        self.currentDeviceOrientation = device.orientation
-        
-        do {
-            try self.updateCaptureConnections(forOrientation: device.orientation)
-        }catch{
-            self.notificationCenter.post(name: CameraControllerErrorNotification, object: error)
-        }
+        self.subscriptions.insert(deviceOrientationSubscription)
+        self.subscriptions.insert(changeCameraRouteSubscription)
     }
-
     
     //MARK: Public Functions
     
@@ -137,27 +136,8 @@ public class CameraController: NSObject {
         self.startRunning()
     }
     
-    /// Conveniently switch the cameras from front to back
-    public func switchCameras() throws {
-        guard self.captureSession.inputs.count > 0 else {
-            return
-        }
-        self.captureSession.beginConfiguration()
-        if let currentInput = self.currentCameraInput {
-            self.captureSession.removeInput(currentInput)
-        }
-        if let output = self.videoOutput {
-            self.captureSession.removeOutput(output)
-        }
-        self.currentCameraInput = try self.swapInputs(desiredDevices: self.desiredDevices)
-        let newOutPut = self.createVideoDataOutput()
-        self.videoOutput = newOutPut
-        self.captureSession.addOutput(newOutPut)
-        try self.updateCaptureConnections(forOrientation: self.currentDeviceOrientation)
-        self.captureSession.commitConfiguration()
-        self.currentCameraPosition = self.oppositeCameraPosition
-    }
-    
+    /// If you need a video preview layer that is initalized with the `AVCaptureSession` then you can use it view this factory style function.
+    /// - Returns: `AVCaptureVideoPreviewLayer` initalized with the `AVCaptureSession`
     public func vendPreviewLayer() -> AVCaptureVideoPreviewLayer {
         let layer = AVCaptureVideoPreviewLayer.init(session: self.captureSession)
         return layer
@@ -197,10 +177,10 @@ public class CameraController: NSObject {
             //Discover and configure all the capture devices
             self.desiredDevices = try self.discoverCaptureDevices()
             try self.configure(desiredDevices: self.desiredDevices)
-            //If the user passed in a desired Camera Route then set the current camera position varaible here.
-            self.currentCameraPosition = desiredCameraPosition
             //Configure the current input device. Front or Back camera.
-            self.currentCameraInput = try self.resetInputs(desiredDevices: self.desiredDevices)
+            self.currentCameraInput = try self.resetInputs(desiredDevices: self.desiredDevices, toRoute: desiredCameraPosition)
+            //If the user passed in a desired Camera Route then set the current camera position varaible here.
+            iOSRawCameraControllerPublishers.cameraRoute.send(desiredCameraPosition)
             
             try self.updateCaptureConnections(forOrientation: self.currentDeviceOrientation)
             self.captureSession.commitConfiguration()
@@ -307,22 +287,8 @@ public class CameraController: NSObject {
         return output
     }
     
-    private func getVideoFileOutput() -> AVCaptureMovieFileOutput? {
-        let output: AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
-        guard let connection = output.connection(with: AVMediaType.video) else {
-            return nil
-        }
-        if output.availableVideoCodecTypes.contains(AVVideoCodecType.h264) {
-            let outputSettings: [String: Any] = [AVVideoCodecKey: AVVideoCodecType.h264]
-            output.setOutputSettings(outputSettings, for: connection)
-        }
-    
-        return output
-    }
-    
-    
-    private func resetInputs(desiredDevices: DesiredDevices) throws -> AVCaptureDeviceInput {
-        switch self.currentCameraPosition {
+    private func resetInputs(desiredDevices: DesiredDevices, toRoute route: iOSRawCameraRoute) throws -> AVCaptureDeviceInput {
+        switch route {
          case .back:
             guard let back = desiredDevices.back else {
                 throw CameraControllerError.noCamerasAvailable
@@ -338,8 +304,8 @@ public class CameraController: NSObject {
          }
     }
     
-    private func swapInputs(desiredDevices: DesiredDevices) throws -> AVCaptureDeviceInput {
-        switch self.currentCameraPosition {
+    private func swapInputs(desiredDevices: DesiredDevices, currentRoute route: iOSRawCameraRoute) throws -> AVCaptureDeviceInput {
+        switch route {
         case .back:
             guard let front = desiredDevices.front else {
                 throw CameraControllerError.noCamerasAvailable
@@ -379,6 +345,51 @@ public class CameraController: NSObject {
             captureConnection.videoOrientation = videoOrientation
         }
     }
+    
+    
+    func deviceRotated(_ sender: Notification) {
+        guard let device = sender.object as? UIDevice else {
+            return
+        }
+        
+        self.currentDeviceOrientation = device.orientation
+        
+        do {
+            try self.updateCaptureConnections(forOrientation: device.orientation)
+        }catch{
+            iOSRawCameraControllerPublishers.cameraControllerError.send(error)
+        }
+    }
+    
+    /// Conveniently switch the cameras from front to back. Will throw an error.
+    func switchCameras() throws {
+        guard self.captureSession.inputs.count > 0 else {
+            throw CameraControllerError.inputsAreInvalid
+        }
+        self.captureSession.beginConfiguration()
+        if let currentInput = self.currentCameraInput {
+            self.captureSession.removeInput(currentInput)
+        }
+        if let output = self.videoOutput {
+            self.captureSession.removeOutput(output)
+        }
+        self.currentCameraInput = try self.swapInputs(desiredDevices: self.desiredDevices, currentRoute: iOSRawCameraControllerPublishers.cameraRoute.value)
+        let newOutPut = self.createVideoDataOutput()
+        self.videoOutput = newOutPut
+        self.captureSession.addOutput(newOutPut)
+        try self.updateCaptureConnections(forOrientation: self.currentDeviceOrientation)
+        self.captureSession.commitConfiguration()
+        iOSRawCameraControllerPublishers.cameraRoute.send(self.oppositeCameraPosition)
+    }
+    
+    
+    deinit {
+        //I need to cancel all subscriptions and remove them on deinitalization.
+        for item in self.subscriptions {
+            item.cancel()
+        }
+        self.subscriptions.removeAll()
+    }
 }
 
 extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
@@ -387,12 +398,12 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
             let buffer = try sampleBuffer.cvPixelBuffer()
             if self.shouldCopyBuffer == true {
                 let bufferCopy = try buffer.copy()
-                self.notificationCenter.post(name: NewCameraBufferNotification, object: bufferCopy)
+                iOSRawCameraControllerPublishers.newPixelBuffer.send(bufferCopy)
             }else {
-                self.notificationCenter.post(name: NewCameraBufferNotification, object: buffer)
+                iOSRawCameraControllerPublishers.newPixelBuffer.send(buffer)
             }
         }catch{
-            self.notificationCenter.post(name: CameraControllerErrorNotification, object: error)
+            iOSRawCameraControllerPublishers.cameraControllerError.send(error)
         }
     }
     
