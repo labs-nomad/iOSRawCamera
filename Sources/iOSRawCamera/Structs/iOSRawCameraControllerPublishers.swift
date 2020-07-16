@@ -15,9 +15,9 @@ public struct iOSRawCameraControllerPublishers {
     /// The definition of the Combine publisher that will provide CVPixelBuffers
     public static let newPixelBuffer: CurrentValueSubject<CVPixelBuffer?, Never> = CurrentValueSubject<CVPixelBuffer?, Never>(nil)
     /// The Combine publisher that will send updates when the `AVCaptureDeviceInput` changes
-    public static let deviceInputChanged: PassthroughSubject<AVCaptureDeviceInput?, Never> = PassthroughSubject<AVCaptureDeviceInput?, Never>()
+    public static let deviceInputChanged: CurrentValueSubject<AVCaptureDeviceInput?, Never> = CurrentValueSubject<AVCaptureDeviceInput?, Never>(nil)
     /// The Combine publisher that will send an update when the `AVCaptureDevice` changes
-    public static let captureDeviceChanged: PassthroughSubject<AVCaptureDevice?, Never> = PassthroughSubject<AVCaptureDevice?, Never>()
+    public static let captureDeviceChanged: CurrentValueSubject<AVCaptureDevice?, Never> = CurrentValueSubject<AVCaptureDevice?, Never>(nil)
     /// The Combine publisher that gets fired when the `iOSRawCameraRoute` changes.
     public static let cameraRoute: CurrentValueSubject<iOSRawCameraRoute, Never> = CurrentValueSubject<iOSRawCameraRoute, Never>(iOSRawCameraRoute.front)
     /// The publisher that allows the user to change camera routes
