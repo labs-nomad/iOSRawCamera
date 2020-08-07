@@ -20,7 +20,9 @@ public class CameraController: NSObject {
     }
     
     public lazy var previewLayer: AVCaptureVideoPreviewLayer = {
-        return AVCaptureVideoPreviewLayer.init(session: self.captureSession)
+        let preview = AVCaptureVideoPreviewLayer.init(session: self.captureSession)
+        preview.videoGravity = .resizeAspectFill
+        return preview
     }()
     
 
