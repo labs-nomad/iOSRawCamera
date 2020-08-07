@@ -19,6 +19,10 @@ public class CameraController: NSObject {
         }
     }
     
+    public lazy var previewLayer: AVCaptureVideoPreviewLayer = {
+        return AVCaptureVideoPreviewLayer.init(session: self.captureSession)
+    }()
+    
 
     /// Convenience variable to check to see if the camera is running or not.
     public var isVideoRunning: Bool {
@@ -134,13 +138,6 @@ public class CameraController: NSObject {
         }
         self.stopRunning()
         self.startRunning()
-    }
-    
-    /// If you need a video preview layer that is initalized with the `AVCaptureSession` then you can use it view this factory style function.
-    /// - Returns: `AVCaptureVideoPreviewLayer` initalized with the `AVCaptureSession`
-    public func vendPreviewLayer() -> AVCaptureVideoPreviewLayer {
-        let layer = AVCaptureVideoPreviewLayer.init(session: self.captureSession)
-        return layer
     }
     
     
