@@ -204,7 +204,7 @@ public class CameraController: NSObject {
         iOSRawCameraControllerPublishers.previewLayerState.send(.unavailable)
     }
     
-    func vendPreviewLayer() throws -> AVCaptureVideoPreviewLayer {
+    public func vendPreviewLayer() throws -> AVCaptureVideoPreviewLayer {
         guard iOSRawCameraControllerPublishers.previewLayerState.value == .available else {
             throw CameraControllerError.videoPreviewLayerUnavailable
         }
@@ -212,7 +212,7 @@ public class CameraController: NSObject {
         return self.previewLayer
     }
     
-    func releasePreviewLayer() {
+    public func releasePreviewLayer() {
         self.previewLayer.removeFromSuperlayer()
         iOSRawCameraControllerPublishers.previewLayerState.send(.available)
     }
