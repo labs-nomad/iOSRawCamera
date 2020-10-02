@@ -19,12 +19,6 @@ public class CameraController: NSObject {
         }
     }
     
-    public lazy var previewLayer: AVCaptureVideoPreviewLayer = {
-        let preview = AVCaptureVideoPreviewLayer.init(session: self.captureSession)
-        preview.videoGravity = .resizeAspectFill
-        return preview
-    }()
-    
 
     /// Convenience variable to check to see if the camera is running or not.
     public var isVideoRunning: Bool {
@@ -69,6 +63,13 @@ public class CameraController: NSObject {
     public var shouldCopyBuffer: Bool = true
     
     //MARK: Private properties
+    
+    lazy var previewLayer: AVCaptureVideoPreviewLayer = {
+         let preview = AVCaptureVideoPreviewLayer.init(session: self.captureSession)
+         preview.videoGravity = .resizeAspectFill
+         return preview
+     }()
+    
     // A tuple that represents the front and back cameras that I expect to discover.
     typealias DesiredDevices = (front: AVCaptureDevice?, back: AVCaptureDevice?)
     // The `AVCaptureSession` that is running the show.
@@ -185,6 +186,7 @@ public class CameraController: NSObject {
             self.captureSession.commitConfiguration()
             // Call the completion for setting up the camera
             self.videoState = VideoFeedState.prepared
+            iOSRawCameraControllerPublishers.previewLayerState.send(.available)
         } catch {
             //Call the completion with the error object
             self.videoState = VideoFeedState.notPrepared(error)
@@ -199,9 +201,21 @@ public class CameraController: NSObject {
         self.removeAllOutputs()
         self.removeAllInputs()
         self.videoState = .notPrepared(nil)
+        iOSRawCameraControllerPublishers.previewLayerState.send(.unavailable)
     }
     
+    func vendPreviewLayer() throws -> AVCaptureVideoPreviewLayer {
+        guard iOSRawCameraControllerPublishers.previewLayerState.value == .available else {
+            throw CameraControllerError.videoPreviewLayerUnavailable
+        }
+        iOSRawCameraControllerPublishers.previewLayerState.send(.unavailable)
+        return self.previewLayer
+    }
     
+    func releasePreviewLayer() {
+        self.previewLayer.removeFromSuperlayer()
+        iOSRawCameraControllerPublishers.previewLayerState.send(.available)
+    }
     
     
     //MARK: Internal Functions

@@ -7,6 +7,7 @@
 //
 
 import iOSRawCamera
+import AVFoundation
 
 class StaticMockAuthorizer: AVCaptureDeviceCameraAuthorizationInterface {
     //MARK: Properties

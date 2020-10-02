@@ -6,6 +6,7 @@
 //  Copyright © 2019 Nomad Company. All rights reserved.
 //
 import XCTest
+import AVFoundation
 @testable import iOSRawCamera
 
 class AVCaptureVideoOrientation_Tests: XCTestCase {

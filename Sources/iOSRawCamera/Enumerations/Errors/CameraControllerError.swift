@@ -18,6 +18,7 @@ public enum CameraControllerError: Error, Equatable {
     case videoOrientationChangesNotSupported
     case couldNotMakeNewVideoOrientation
     case noConnections
+    case videoPreviewLayerUnavailable
     
     public static func ==(lhs: CameraControllerError, rhs: CameraControllerError) -> Bool {
         switch (lhs, rhs) {
@@ -30,6 +31,8 @@ public enum CameraControllerError: Error, Equatable {
         case (CameraControllerError.permissionNotDetermined, CameraControllerError.permissionNotDetermined):
             return true
         case (CameraControllerError.badPermissions, CameraControllerError.badPermissions):
+            return true
+        case (CameraControllerError.videoPreviewLayerUnavailable, CameraControllerError.videoPreviewLayerUnavailable):
             return true
         default:
             return false
