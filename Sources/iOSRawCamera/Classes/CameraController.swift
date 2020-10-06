@@ -53,11 +53,11 @@ public class CameraController: NSObject {
         }
     }
     
-    public private(set) var currentCameraDevice: AVCaptureDevice? {
-        didSet {
-            
-        }
-    }
+//    public private(set) var currentCameraDevice: AVCaptureDevice? {
+//        didSet {
+//            
+//        }
+//    }
     
     /// When the delegate receives a `CVPixelBuffer`should we make a copy of it before sending it into the the `NewCameraBufferNotification`
     public var shouldCopyBuffer: Bool = true
