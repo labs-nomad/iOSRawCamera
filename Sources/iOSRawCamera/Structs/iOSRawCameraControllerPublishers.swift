@@ -27,3 +27,4 @@ public struct iOSRawCameraControllerPublishers {
     /// The Combine publisher that will publish `Error` objects from the `CameraController`
     public static let cameraControllerError: PassthroughSubject<Error, Never> = PassthroughSubject<Error, Never>()
 }
+
