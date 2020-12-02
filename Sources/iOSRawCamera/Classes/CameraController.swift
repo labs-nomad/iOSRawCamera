@@ -87,7 +87,7 @@ public class CameraController: NSObject {
     public override init() {
         super.init()
         self.currentDeviceOrientation = UIDevice.current.orientation
-        
+        print("Init Camera Controller")
         
         let deviceOrientationSubscription = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification).sink { self.deviceRotated($0) }
         
