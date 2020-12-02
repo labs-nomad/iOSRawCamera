@@ -80,11 +80,7 @@ public class CameraController: NSObject {
     
     private var desiredDevices: DesiredDevices = (front: nil, back: nil)
     
-    var currentDeviceOrientation: UIDeviceOrientation = .unknown {
-        didSet {
-            print("Did set device orientation: \(self.currentDeviceOrientation.rawValue)")
-        }
-    }
+    var currentDeviceOrientation: UIDeviceOrientation = .unknown
     
     var subscriptions: Set<AnyCancellable> = []
     //MARK: Init
