@@ -217,6 +217,22 @@ public class CameraController: NSObject {
         iOSRawCameraControllerPublishers.previewLayerState.send(.available)
     }
     
+    public func updateCaptureConnections(forOrientation orientation: UIDeviceOrientation) throws {
+        guard let connections = self.videoOutput?.connections else {
+            throw CameraControllerError.noConnections
+        }
+        for captureConnection in connections {
+            guard captureConnection.isVideoOrientationSupported == true else {
+                throw CameraControllerError.videoOrientationChangesNotSupported
+            }
+            guard let videoOrientation = AVCaptureVideoOrientation(deviceOrientation: orientation) else {
+                throw CameraControllerError.couldNotMakeNewVideoOrientation
+            }
+            
+            captureConnection.videoOrientation = videoOrientation
+        }
+    }
+    
     
     //MARK: Internal Functions
     
@@ -341,22 +357,6 @@ public class CameraController: NSObject {
         }
         self.captureSession.addInput(input)
         return input
-    }
-    
-    private func updateCaptureConnections(forOrientation orientation: UIDeviceOrientation) throws {
-        guard let connections = self.videoOutput?.connections else {
-            throw CameraControllerError.noConnections
-        }
-        for captureConnection in connections {
-            guard captureConnection.isVideoOrientationSupported == true else {
-                throw CameraControllerError.videoOrientationChangesNotSupported
-            }
-            guard let videoOrientation = AVCaptureVideoOrientation(deviceOrientation: orientation) else {
-                throw CameraControllerError.couldNotMakeNewVideoOrientation
-            }
-            
-            captureConnection.videoOrientation = videoOrientation
-        }
     }
     
     
