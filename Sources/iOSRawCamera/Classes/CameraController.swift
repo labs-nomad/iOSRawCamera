@@ -369,6 +369,10 @@ public class CameraController: NSObject {
             return
         }
         
+        guard device.orientation != .unknown else {
+            return
+        }
+        
         self.currentDeviceOrientation = device.orientation
         
         do {
