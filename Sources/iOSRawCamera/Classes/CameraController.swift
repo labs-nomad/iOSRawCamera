@@ -80,14 +80,18 @@ public class CameraController: NSObject {
     
     private var desiredDevices: DesiredDevices = (front: nil, back: nil)
     
-    var currentDeviceOrientation: UIDeviceOrientation = .unknown
+    var currentDeviceOrientation: UIDeviceOrientation = .unknown {
+        didSet {
+            print("Did set device orientation: \(self.currentDeviceOrientation.rawValue)")
+        }
+    }
     
     var subscriptions: Set<AnyCancellable> = []
     //MARK: Init
     public override init() {
         super.init()
         self.currentDeviceOrientation = UIDevice.current.orientation
-        print("Init Camera Controller")
+        
         
         let deviceOrientationSubscription = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification).sink { self.deviceRotated($0) }
         
